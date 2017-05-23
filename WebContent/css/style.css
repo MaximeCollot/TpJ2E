@@ -11,3 +11,9 @@ h1, h2 {
 	display: block;
 	text-align: center;
 }
+
+.footer_logo {
+	width: 25px;
+	height: 100px;
+	float: right;
+}
