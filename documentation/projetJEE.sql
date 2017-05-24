@@ -53,8 +53,7 @@ CREATE TABLE IF NOT EXISTS `meal` (
   `recipe` varchar(255) NOT NULL,
   `number_person` int(11) NOT NULL,
   `type` varchar(255) NOT NULL,
-  `preparation_time` int(11) NOT NULL,
-  `preparation_time_unit` varchar(20) NOT NULL,
+  `preparation_time_min` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   PRIMARY KEY (`id_meal`),
   UNIQUE KEY `id_meal` (`id_meal`)
@@ -123,6 +122,10 @@ ON meal (type);
 CREATE INDEX idx_meal_level
 ON meal (level);
 
+CREATE INDEX idx_meal_preparation_time_min
+ON meal (preparation_time_min);
+
+
 
 CREATE INDEX idx_user_id_user
 ON u$eR (id_user);
@@ -132,6 +135,7 @@ ON u$eR (firstName);
 
 CREATE INDEX idx_user_lastName
 ON u$eR (lastName);
+
 
 
 
