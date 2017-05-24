@@ -2,13 +2,13 @@ package model;
 
 public class Recette {
 
-	private int id;
-	private String name;
-	private String recipe;
-	private int preparationTime;
-	private int level;
-	private int nbPeople;
-	private String cookType;
+	private int id =0;
+	private String name ="yoyo";
+	private String recipe= "on est bien";
+	private int preparationTime = 20;
+	private int level = 3;
+	private int nbPeople =1;
+	private String cookType ="SALAD";
 	
 	
 	
