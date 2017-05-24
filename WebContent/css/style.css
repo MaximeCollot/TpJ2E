@@ -27,11 +27,7 @@ h1, h2 {
 
 .footer {
 	height: 5%;
-}
-
-.menuButton {
-	width: 20%;
-	height: 90%;
+	min-height: 50px;
 }
 
 .menuForm {
@@ -39,4 +35,23 @@ h1, h2 {
 	height: 100%;
 	text-align: center;
 	
+}
+
+.menuButton {
+	width: 25%;
+	height: 90%;
+	margin-left: 20px;
+	font-size: xx-large;
+}
+
+.emergencyButton {
+	background-color: orange;
+}
+
+.recipeButton {
+	background-color: blue;
+}
+
+.shopButton {
+	background-color: green;
 }
