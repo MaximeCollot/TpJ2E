@@ -28,25 +28,17 @@ USE `projetJEE`;
 -- Structure de la table `comment`
 --
 
-DROP TABLE IF EXISTS `comment`;
-CREATE TABLE IF NOT EXISTS `comment` (
-  `id_comment` int(11) NOT NULL,
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id_comment` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
-  `review` varchar(255) NOT NULL,
-  `note` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `lien_meal_comment`
---
-
-DROP TABLE IF EXISTS `lien_meal_comment`;
-CREATE TABLE IF NOT EXISTS `lien_meal_comment` (
   `id_meal` int(11) NOT NULL,
-  `id_comment` int(11) NOT NULL
+  `review` varchar(255) NOT NULL,
+  `note` int(11) NOT NULL,
+  PRIMARY KEY (`id_comment`),
+  UNIQUE KEY `id_meal` (`id_comment`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- --------------------------------------------------------
 
@@ -56,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `lien_meal_comment` (
 
 DROP TABLE IF EXISTS `meal`;
 CREATE TABLE IF NOT EXISTS `meal` (
-  `id_meal` int(11) NOT NULL,
+  `id_meal` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `recipe` varchar(255) NOT NULL,
   `number_person` int(11) NOT NULL,
@@ -65,12 +57,7 @@ CREATE TABLE IF NOT EXISTS `meal` (
   `preparation_time_unit` varchar(20) NOT NULL,
   `level` int(11) NOT NULL,
   PRIMARY KEY (`id_meal`),
-  UNIQUE KEY `id_meal` (`id_meal`),
-  KEY `name` (`name`),
-  KEY `recipe` (`recipe`),
-  KEY `recipe_2` (`recipe`),
-  KEY `type` (`type`),
-  KEY `level` (`level`)
+  UNIQUE KEY `id_meal` (`id_meal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -81,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `meal` (
 
 DROP TABLE IF EXISTS `u$eR`;
 CREATE TABLE IF NOT EXISTS `u$eR` (
-  `id_user` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `isAdmin` int(1) NOT NULL DEFAULT '0',
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
@@ -90,13 +77,64 @@ CREATE TABLE IF NOT EXISTS `u$eR` (
   `login` varchar(255) NOT NULL,
   `pa$$woRd` varchar(255) NOT NULL,
   PRIMARY KEY (`id_user`),
-  UNIQUE KEY `login_2` (`login`),
-  UNIQUE KEY `id_user` (`id_user`),
-  KEY `login` (`login`),
-  KEY `email` (`email`),
-  KEY `lastName` (`lastName`),
-  KEY `firstName` (`firstName`)
+  UNIQUE KEY `login_2` (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+
+ALTER TABLE comments
+ADD CONSTRAINT FK_id_meal
+FOREIGN KEY (id_meal) REFERENCES meal(id_meal);
+
+
+ALTER TABLE comments
+ADD CONSTRAINT FK_id_user
+FOREIGN KEY (id_user) REFERENCES u$eR(id_user);
+
+
+CREATE INDEX idx_comments_id_comment
+ON comments (id_comment);
+
+CREATE INDEX idx_comments_id_user
+ON comments (id_user);
+
+CREATE INDEX idx_comments_note
+ON comments (note);
+
+CREATE INDEX idx_comments_id_meal
+ON  comments (id_meal);
+
+CREATE INDEX idx_meal_id_meal
+ON meal (id_meal);
+
+CREATE INDEX idx_meal_name
+ON meal (name);
+
+CREATE INDEX idx_meal_number_person
+ON meal (number_person);
+
+CREATE INDEX idx_meal_type
+ON meal (type);
+
+CREATE INDEX idx_meal_level
+ON meal (level);
+
+
+CREATE INDEX idx_user_id_user
+ON u$eR (id_user);
+
+CREATE INDEX idx_user_firstName
+ON u$eR (firstName);
+
+CREATE INDEX idx_user_lastName
+ON u$eR (lastName);
+
+
+
 
 --
 -- Contenu de la table `u$eR`
@@ -108,3 +146,8 @@ INSERT INTO `u$eR` (`id_user`, `isAdmin`, `firstName`, `lastName`, `birthday`, `
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+
+
