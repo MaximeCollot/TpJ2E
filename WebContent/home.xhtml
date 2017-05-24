@@ -5,13 +5,18 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:p="http://primefaces.org/ui"
 		template="/template.xhtml">
+		
+		
+<ui:define name="header">
+<div id="header" class="header"></div>
+</ui:define>
 
 <ui:define name="content">
 <div id="content" class="content">
 
 <h:form class="menuForm">
-	<p:commandButton value="Emergency" id="EmergencyButton" styleClass="menuButton emergencyButton" action="#{controllerBean.goTo('Emergency')}"/>
-	<p:commandButton value="Recipe" id="RecipeButton" styleClass="menuButton recipeButton" action="#{controllerBean.goTo('Recipe')}"/>
+	<p:commandButton value="Emergency" id="EmergencyButton" styleClass="menuButton emergencyButton" action="#{controllerBean.goTo('Emergency')}" ajax="false" />
+	<p:commandButton value="Recipe" id="RecipeButton" styleClass="menuButton recipeButton" action="#{controllerBean.goTo('Recipe')}" ajax="false" />
 	<p:commandButton value="Shop" id="ShopButton" styleClass="menuButton shopButton" action="#{controllerBean.goTo('Shop')}" ajax="false" /> 
 </h:form>
 

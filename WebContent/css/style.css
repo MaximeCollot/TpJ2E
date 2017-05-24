@@ -55,3 +55,26 @@ h1, h2 {
 .shopButton {
 	background-color: green;
 }
+
+.emergencyHeader {
+	background-color: #FFCC66;
+}
+
+.recipeHeader {
+	background-color: blue;
+}
+
+.titreForm {
+	height: 100%;
+	width: 30%;
+}
+.titreHeader {
+	font-size: x-large;
+	height: 100%;
+	background-color: orange;	
+}
+
+.connectForm {
+	float: right;
+	height: 100%;
+}

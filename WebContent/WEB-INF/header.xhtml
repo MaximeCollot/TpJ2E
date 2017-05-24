@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+		
+<ui:composition>
+	<h:form class="titreForm">
+		<p:commandButton value="Emergency" id="titreHeader" styleClass="titreHeader" action="#{controllerBean.goTo('Home')}" ajax="false" />
+	</h:form>
+	
+	<h:form class="connectForm">
+		<p:commandButton value="Become Member" id="subscribeButton" styleClass="subscribeButton" action="#{controllerBean.goTo('Emergency')}" icon="fa-plus" ajax="false" />
+		<p:inputText />
+	</h:form>
+</ui:composition>
+</html>
