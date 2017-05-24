@@ -15,7 +15,7 @@ public class ControllerBean implements Serializable{
 	
 	public void goTo(String page) {
 		
-		System.out.println("home");
+		System.out.println(page);
 	}
 
 }
