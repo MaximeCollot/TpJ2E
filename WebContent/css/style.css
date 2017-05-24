@@ -67,6 +67,7 @@ h1, h2 {
 .titreForm {
 	height: 100%;
 	width: 30%;
+	float: left;
 }
 .titreHeader {
 	font-size: x-large;
@@ -76,5 +77,8 @@ h1, h2 {
 
 .connectForm {
 	float: right;
-	height: 100%;
+}
+
+.connectInput {
+	display: grid;
 }
