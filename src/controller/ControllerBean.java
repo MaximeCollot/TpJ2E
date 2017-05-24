@@ -13,9 +13,20 @@ public class ControllerBean implements Serializable{
 		
 	}
 	
-	public void goTo(String page) {
+	public String goTo(String page) {
 		
-		System.out.println(page);
+		switch(page) {
+		   case "Shop" :
+		      return "http://www.aupanierfermier.com/";
+		case "Recipe" :
+			   return "recipe";
+		case "Emergency" :
+			   return "emergency";
+		case "Home" :
+			   return "home";
+		default : 
+			   return "home";
+		}
 	}
 
 }

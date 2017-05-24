@@ -10,9 +10,9 @@
 <div id="content" class="content">
 
 <h:form class="menuForm">
-	<p:commandLink value="Emergency" id="EmergencyButton" styleClass="menuButton emergencyButton" action="#{controllerBean.goTo('Emergency')}"/>
-	<p:commandLink value="Recipe" id="RecipeButton" styleClass="menuButton recipeButton" action="#{controllerBean.goTo('Recipe')}"/>
-	<p:commandLink value="Shop" id="ShopButton" styleClass="menuButton shopButton" action="#{controllerBean.goTo('Shop')}"/> 
+	<p:commandButton value="Emergency" id="EmergencyButton" styleClass="menuButton emergencyButton" action="#{controllerBean.goTo('Emergency')}"/>
+	<p:commandButton value="Recipe" id="RecipeButton" styleClass="menuButton recipeButton" action="#{controllerBean.goTo('Recipe')}"/>
+	<p:commandButton value="Shop" id="ShopButton" styleClass="menuButton shopButton" action="#{controllerBean.goTo('Shop')}" ajax="false" /> 
 </h:form>
 
 </div>
