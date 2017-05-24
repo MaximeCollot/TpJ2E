@@ -6,7 +6,7 @@
 			<tr>
 				<td>Firsname</td>
 				<h:inputText id="firstname" value="#{user.firstname}" required="true">
-					<f:validator validatorId="validators.firstname" />
+					<f:validator validatorId="validators.lastname" />
 				</h:inputText>
 				<td><h:message for="firstname" showDetail="true“ style=" color:red" />
 			</tr>
@@ -39,14 +39,14 @@
 				<td><h:message for="login" showDetail="true“ style=" color:red" />
 			</tr>
 			<tr>
-				<td>Your Login</td>
-				<h:inputText id="email" value="#{user.emai}" required="true">
-					<f:validator validatorId="validators.email" />
+				<td>Password</td>
+				<h:inputSecret id="password" value="#{user.password}" required="true">
+					<f:validator validatorId="validators.password" />
 				</h:inputText>
-				<td><h:message for=""email"" showDetail="true“ style=" color:red" />
+				<td><h:message for="password" showDetail="true" style=" color:red" />
 			</tr>
 			<tr>
-				<td>Your Password</td>
+				<td>Re-enter Password</td>
 				<td><h:inputSecret value="#{user.password}" /></td>
 			</tr>
 			<tr>
