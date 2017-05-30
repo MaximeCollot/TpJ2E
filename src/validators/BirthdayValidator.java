@@ -12,7 +12,7 @@ import javax.faces.validator.*;
 @FacesValidator(value = "validators.birthday")
 public class BirthdayValidator implements Validator {
 	
-	private static final String BIRTHDAY_PATTERN = "[a-zA-Z0-9]";
+	private static final String BIRTHDAY_PATTERN = "[0-9]-[0-9]-[0-9]";
 	private Pattern pattern;
 	private Matcher matcher;
 

@@ -9,10 +9,10 @@
 <ui:composition>
 	<p:growl id="growl" life="2000" />
 	<h:form class="titreForm">
-		<p:commandButton value="Emergency" id="titreHeader" styleClass="titreHeader" action="#{controllerBean.goTo('Home')}" ajax="false" />
+		<p:commandButton value="#{titre}" id="titreHeader" styleClass="titreHeader #{titre}Header" action="#{controllerBean.goTo('Home')}" ajax="false" />
 	</h:form>
-	
-	<c:if test="${!controller.connected}">
+	<c:out value="${ controllerBean.connected }">Valeur par défaut</c:out>
+	<c:if test="${ connected == 'ko' }">
 	<table class="connectForm" border="0">
 		<tr>
 			<td>
@@ -36,7 +36,7 @@
 	</table>
 	</c:if>
 	
-	<c:if test="${controller.connected}">
+	<c:if test="${ connected == 'ok' }">
 	ok
 	</c:if>
 	
