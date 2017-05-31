@@ -1,5 +1,6 @@
 <ui:composition
 		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:c="http://java.sun.com/jsp/jstl/core"
 		xmlns:h="http://java.sun.com/jsf/html"
 		xmlns:f="http://java.sun.com/jsf/core"
 		xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -24,53 +25,92 @@
 <div id="content" class="content">
 
 <h1>Recipe</h1>
+Cook time = <h:outputText value="#{recipeSearch.recette.preparationTime}"/>
+Level =<h:outputText value="#{recipeSearch.recette.level}"/>
+Nb Personne =<h:outputText value="#{recipeSearch.recette.nbPeople}"/>
+Type = <h:outputText value="#{recipeSearch.recette.cooktype}"/>
 
-<p:fieldset legend="Tell what do you want !" style="margin-bottom:20px">
- <div class="ui-g">
-    
-        <div class="ui-g-12 ui-g-nopad">
-            <div class="ui-g">
-                <div class="ui-g-12 ui-md-2">
-                	<h:outputLabel for="duration" value="Preparation Duration : " />
-                </div>
-                <div class="ui-g-12 ui-md-4">
-       				<p:spinner id="duration" value="#{spinnerView.number2}" stepFactor="1" />
-       			</div>
-                <div class="ui-g-12 ui-md-2">
-                	<h:outputLabel for="level" value= "Cook expertise : "/>
-                </div>
-                <div class="ui-g-12 ui-md-4">
-					<p:rating id="level" value="#{recette.level}" />
-				</div>
-            </div>
-            <div class="ui-g">
-                <div class="ui-g-12 ui-md-2">
-                	<h:outputLabel for="nb_person" value= "For how many people : "/>
-                </div>
-                <div class="ui-g-12 ui-md-4">	
-					
-					<div class="ui-g-12 ui-md-4">	
-      					<p:slider for="nb_person" />
-      				</div>
-      				<p:inputText id="nb_person" value="#{recette.number_person}" />
-       			</div>
-                <div class="ui-g-12 ui-md-2">
-                	 <h:outputLabel for="cooktype" value= "Cook Type : "/>
-                </div>
-                <div class="ui-g-12 ui-md-4">
-					<p:selectCheckboxMenu id="cooktype" value="#{recette.cooktype}"  multiple="true"
-                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px"/>
-            		<f:selectItems for="cooktype" value="#{recette.cooktype}" />
-				</div>
-            </div>
- 
-            
-        </div>
-    
-</div>    
-<p:commandButton value="Teach Me !" id="recherche_button" update="growl"  style="position:relative;float:right" styleClass="ui-priority-primary" />
+Recipe View = <h:outputText value="#{recipeSearch.recipe_view}" />
+<br/>
+<h:outputText value="#{recipeSearch.recette.toString}" />
 
-</p:fieldset>
+<c:if test="#{recipeSearch.recipe_view == 'search'}">
+	<p:fieldset legend="Tell what do you want !" style="margin-bottom:20px">
+	 <div class="ui-g">
+	    
+	        <div class="ui-g-12 ui-g-nopad">
+	            <div class="ui-g">
+	                <div class="ui-g-12 ui-md-1">
+	                	<img src="ressource/duration.png" alt="preparationTime - Logo" class="preparationTime_logo" width="80" height="80"/>
+	                </div>
+	                <div class="ui-g-12 ui-md-5">
+	                	<div class="ui-g">
+	                		<h:outputLabel for="preparationTime" value="Preparation duration" />
+	                	</div>
+	                	<div class="ui-g">
+	                		<p:spinner id="preparationTime" value="#{recipeSearch.recette.preparationTime}" stepFactor="1" />
+	                	</div>
+	       			</div>
+	                <div class="ui-g-12 ui-md-1">
+	                	<img src="ressource/expertise.png" alt="Expertise - Logo" class="expertise_logo" width="80" height="80"/>               	
+	                </div>
+	                <div class="ui-g-12 ui-md-5">
+	                	<div class="ui-g">
+	                		<h:outputLabel for="level" value= "Cook expertise"/>
+	                	</div>
+	                	<div class="ui-g">
+	                		<p:rating id="level" value="#{recipeSearch.recette.level}" />
+	                	</div>
+					</div>
+	            </div>
+	
+	            <div class="ui-g">
+	                <div class="ui-g-12 ui-md-1">
+	                	<img src="ressource/nb_person.png" alt="Number of Person - Logo" class="nb_person_logo" width="80" height="80"/>               	
+	                </div>
+	                <div class="ui-g-12 ui-md-5">
+	                	<div class="ui-g">
+	                		<h:outputLabel for="nb_person" value= "For how many people"/>
+	                	</div>
+	                	<div class="ui-g">
+	                		<p:inputText id="nb_person" value="#{recipeSearch.recette.nbPeople}"  style="width: 100px"/>
+	                	</div>
+	                	<div class="ui-g">
+	                		<p:slider for="nb_person" style="width: 100px"/>
+	                	</div>				
+	      			
+	       			</div>
+	                <div class="ui-g-12 ui-md-1">
+	                	<img src="ressource/type.png" alt="Type - Logo" class="type_logo" width="80" height="80"/>               	
+	                </div>
+	                <div class="ui-g-12 ui-md-5">
+	                	<div class="ui-g">
+	                		<h:outputLabel for="cooktype" value= "Cook Type"/>
+	                	</div>
+	                	<div class="ui-g">
+	                		<p:inputText id="cooktype" value="#{recipeSearch.recette.cooktype}"  style="width: 100px"/>
+	                		<!--  <p:selectCheckboxMenu id="cooktype" value="#{recipeSearch.recette.cooktype}"  multiple="true"
+	                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px"/>
+	            			<f:selectItems for="cooktype" value="#{recipeSearch.recette.cooktype}" />-->
+	                	</div>	
+	                	
+						
+					</div>
+	            </div>
+	 
+	            
+	        </div>
+	    
+	</div>    
+	<p:commandButton value="Teach Me !" id="recherche_button"  action="#{recipeSearch.search}" style="position:relative;float:right" styleClass="ui-priority-primary" />
+	
+	</p:fieldset>
+</c:if>
+
+<c:if test="#{recipeSearch.recipe_view == 'result'}">
+ça marche
+<p:commandButton value="Come Back to search" id="comeback_button"  action="#{recipeSearch.comeback}" style="position:relative;float:right" styleClass="ui-priority-primary" />
+</c:if>
 
 
 	

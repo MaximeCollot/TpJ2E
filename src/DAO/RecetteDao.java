@@ -63,7 +63,7 @@ public class RecetteDao extends Dao<Recette> {
 			ps.setString(1, r.getName());
 			ps.setString(2, r.getRecipe());
 			ps.setInt(3, r.getNbPeople());
-			ps.setString(4, r.getCookType());
+			ps.setString(4, r.getCooktype());
 			ps.setInt(5, r.getPreparationTime());
 			ps.setInt(6, r.getLevel());
 			try {
@@ -108,7 +108,7 @@ public class RecetteDao extends Dao<Recette> {
 			ps.setString(1, r.getName());
 			ps.setString(2, r.getRecipe());
 			ps.setInt(3, r.getNbPeople());
-			ps.setString(4, r.getCookType());
+			ps.setString(4, r.getCooktype());
 			ps.setInt(5, r.getPreparationTime());
 			ps.setInt(6, r.getLevel());
 			ps.setInt(7, r.getId());

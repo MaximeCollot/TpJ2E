@@ -26,6 +26,11 @@ public class Recette {
 		this.cooktype = cooktype;
 	}
 	
+
+	public int getId() {
+		return id;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -33,41 +38,49 @@ public class Recette {
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getRecipe() {
 		return recipe;
 	}
+
 	public void setRecipe(String recipe) {
 		this.recipe = recipe;
 	}
+
 	public int getPreparationTime() {
 		return preparationTime;
 	}
+
 	public void setPreparationTime(int preparationTime) {
 		this.preparationTime = preparationTime;
 	}
+
 	public int getLevel() {
 		return level;
 	}
+
 	public void setLevel(int level) {
 		this.level = level;
 	}
+
 	public int getNbPeople() {
 		return nbPeople;
 	}
+
 	public void setNbPeople(int nbPeople) {
 		this.nbPeople = nbPeople;
 	}
-	public String getCookType() {
+
+	public String getCooktype() {
 		return cooktype;
 	}
-	public void setCookType(String cookType) {
-		this.cooktype = cookType;
-	}
-	public int getId() {
-		return id;
+
+	public void setCooktype(String cooktype) {
+		this.cooktype = cooktype;
 	}
 
 	@Override
