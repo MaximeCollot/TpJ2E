@@ -31,8 +31,7 @@ Nb Personne =<h:outputText value="#{recipeSearch.recette.nbPeople}"/>
 Type = <h:outputText value="#{recipeSearch.recette.cooktype}"/>
 
 Recipe View = <h:outputText value="#{recipeSearch.recipe_view}" />
-<br/>
-<h:outputText value="#{recipeSearch.recette.toString}" />
+
 
 <c:if test="#{recipeSearch.recipe_view == 'search'}">
 	<p:fieldset legend="Tell what do you want !" style="margin-bottom:20px">
@@ -101,15 +100,18 @@ Recipe View = <h:outputText value="#{recipeSearch.recipe_view}" />
 	            
 	        </div>
 	    
-	</div>    
-	<p:commandButton value="Teach Me !" id="recherche_button"  action="#{recipeSearch.search}" style="position:relative;float:right" styleClass="ui-priority-primary" />
-	
+	</div>
+<h:form>
+	<p:commandButton value="Teach Me !" id="recherche_button"  action="#{recipeSearch.search}" style="position:relative;float:right" styleClass="ui-priority-primary" ajax="false" />
+</h:form>	
 	</p:fieldset>
 </c:if>
 
 <c:if test="#{recipeSearch.recipe_view == 'result'}">
 ça marche
-<p:commandButton value="Come Back to search" id="comeback_button"  action="#{recipeSearch.comeback}" style="position:relative;float:right" styleClass="ui-priority-primary" />
+<h:form>
+	<p:commandButton value="Come Back to search" id="comeback_button"  action="#{recipeSearch.comeback}" style="position:relative;float:right" styleClass="ui-priority-primary" ajax="false"/>
+</h:form>
 </c:if>
 
 
