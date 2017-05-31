@@ -9,7 +9,7 @@
 <ui:composition>
 	<p:growl id="growl" life="2000" />
 	<h:form class="titreForm">
-		<p:commandButton value="Emergency" id="titreHeader" styleClass="titreHeader" action="#{controllerBean.goTo('Home')}" ajax="false" />
+		<p:commandButton value="Home" id="titreHeader" styleClass="titreHeader" action="#{controllerBean.goTo('Home')}" ajax="false" />
 	</h:form>
 	
 	<c:if test="${!controller.connected}">

@@ -4,43 +4,71 @@
 		xmlns:f="http://java.sun.com/jsf/core"
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:p="http://primefaces.org/ui"
+		xmlns:mc="http://localhost/TpJ2E/mesComposants"
 		template="/template.xhtml">
+
+
+<ui:define name="header">
+<div id="header" class="header emergencyHeader">
+<mc:headerContent titre="Home"/>
+</div>
+</ui:define>
 
 <ui:define name="content">
 <div id="content" class="content">
 
 <h1>Recipe</h1>
 
-<p:fieldset legend="Recherche" style="margin-bottom:20px">
-	<div class="ui-g">
-	        <div>
-		        <h:outputLabel for="duration" value="Preparation Duration : " />
-	        	<p:spinner id="duration" value="#{spinnerView.number2}" stepFactor="1" />
-	        </div>
-	        
-	        <div>
-	        	<h:outputLabel for="level" value= "Cook expertise : "/>
-				<p:rating id="level" value="#{recette.level}" />
-	        </div>
+<p:fieldset legend="Tell what do you want !" style="margin-bottom:20px">
+ <div class="ui-g">
+    
+        <div class="ui-g-12 ui-g-nopad">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-2">
+                	<h:outputLabel for="duration" value="Preparation Duration : " />
+                </div>
+                <div class="ui-g-12 ui-md-4">
+       				<p:spinner id="duration" value="#{spinnerView.number2}" stepFactor="1" />
+       			</div>
+                <div class="ui-g-12 ui-md-2">
+                	<h:outputLabel for="level" value= "Cook expertise : "/>
+                </div>
+                <div class="ui-g-12 ui-md-4">
+					<p:rating id="level" value="#{recette.level}" />
+				</div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-2">
+                	<h:outputLabel for="nb_person" value= "For how many people : "/>
+                </div>
+                <div class="ui-g-12 ui-md-4">	
+					
+					<div class="ui-g-12 ui-md-4">	
+      					<p:slider for="nb_person" />
+      				</div>
+      				<p:inputText id="nb_person" value="#{recette.number_person}" />
+       			</div>
+                <div class="ui-g-12 ui-md-2">
+                	 <h:outputLabel for="cooktype" value= "Cook Type : "/>
+                </div>
+                <div class="ui-g-12 ui-md-4">
+					<p:selectCheckboxMenu id="cooktype" value="#{recette.cooktype}"  multiple="true"
+                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px"/>
+            		<f:selectItems for="cooktype" value="#{recette.cooktype}" />
+				</div>
+            </div>
  
-       </div>
-       <div class="ui-g">
-	        <div>    
-	        	<h:outputLabel for="nb_person" value= "For how many people : "/>	
-				<p:inputText id="nb_person" value="#{recette.number_person}" />
-        		<p:slider for="nb_person" />
-        	</div>
-        	<div> 
-				<h:outputLabel for="cooktype" value= "Cook Type : "/>
-				<p:selectCheckboxMenu id="cooktype" value="#{cookType.cooktype}" label="Type" multiple="true"
-		                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-		            <f:selectItems for="cooktype" value="#{recette.type}" />
-		        </p:selectCheckboxMenu>	
-		     </div>
-       </div>	
+            
+        </div>
+    
+</div>    
+<p:commandButton value="Teach Me !" id="recherche_button" update="growl"  style="position:relative;float:right" styleClass="ui-priority-primary" />
 
-<h:commandButton value="Recherche" action="index.xhtml"/>
 </p:fieldset>
+
+
+	
+	
 
 
 </div>
