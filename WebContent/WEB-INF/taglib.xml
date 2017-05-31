@@ -9,7 +9,11 @@
 		<source>header.xhtml</source>
 	</tag>
 	<tag>
-		<tag-name>loginPage</tag-name>
+		<tag-name>registerPage</tag-name>
 		<source>register.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>accountPage</tag-name>
+		<source>account.xhtml</source>
 	</tag>
 </facelet-taglib>

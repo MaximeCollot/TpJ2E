@@ -10,7 +10,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.core.ApplicationContext;
+
+import com.sun.net.httpserver.HttpContext;
 
 import DAO.UserDao;
 import connexion.Connexion;
@@ -23,15 +29,18 @@ public class ControllerBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private User user;
 	private UserDao userDao;
-	
-	private String connected;
-
+	private Boolean connected;
+	private Integer connectionCounter;
 	
 	public ControllerBean (){
 		user = new User();
-		connected = "ko";
-		HttpSession session = SessionUtils.getSession();
+		connected = false;
+		connectionCounter = 0;
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		session.setAttribute("connected", connected);
+		HttpServletRequest request = SessionUtils.getRequest();
+		request.setAttribute("connected", connected);
+		
 		
 		try {
 			userDao = new UserDao(Connexion.getInstance());
@@ -42,9 +51,13 @@ public class ControllerBean implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public String goTo(String page) throws IOException {
+		
+		HttpServletRequest request = SessionUtils.getRequest();
+		request.setAttribute("connected", connected);
 		
 		switch(page) {
 		   case "Shop" :
@@ -62,14 +75,30 @@ public class ControllerBean implements Serializable{
 		}
 	}
 	
-	public User getUser(){
-		return this.user;
+	public User getUser() {
+		return user;
 	}
-	
-	public String getConnected(){
-		return this.connected;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
-	
+
+	public Boolean getConnected() {
+		return connected;
+	}
+
+	public void setConnected(Boolean connected) {
+		this.connected = connected;
+	}
+
+	public Integer getConnectionCounter() {
+		return connectionCounter;
+	}
+
+	public void setConnectionCounter(Integer connectionCounter) {
+		this.connectionCounter = connectionCounter;
+	}
+
 	public void connect () {
 		User tempUser = null;
 		try {
@@ -83,12 +112,34 @@ public class ControllerBean implements Serializable{
 		}
 		if (user.getPassword().equals(tempUser.getPassword())){
 			user = tempUser;
-			connected = "ok";
+			connected = true;
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("connected", connected);
+			ServletContext context = SessionUtils.getServletContext();
+			if(context.getAttribute("CONNECTIONS")!=null){
+				Integer counterApp=(Integer)context.getAttribute("CONNECTIONS");
+				counterApp++;
+				connectionCounter=counterApp;
+			}
+			context.setAttribute("CONNECTIONS",connectionCounter);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Vous êtes connectés !", null));
 		}else{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Problème de couple login/mot de passe", null));
 		}
+	}
+	
+	public void logout () {
+		user = new User();
+		connected = false;
+		HttpSession session = SessionUtils.getSession();
+		session.setAttribute("connected", connected);
+		ServletContext context = SessionUtils.getServletContext();
+		if(context.getAttribute("CONNECTIONS")!=null){
+			Integer counterApp=(Integer)context.getAttribute("CONNECTIONS");
+			counterApp--;
+			connectionCounter=counterApp;
+		}
+		context.setAttribute("CONNECTIONS",connectionCounter);
 	}
 
 }

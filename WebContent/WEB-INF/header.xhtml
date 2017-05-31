@@ -3,17 +3,17 @@
 		xmlns:h="http://java.sun.com/jsf/html"
 		xmlns:f="http://java.sun.com/jsf/core"
 		xmlns:ui="http://java.sun.com/jsf/facelets"
-		xmlns:p="http://primefaces.org/ui"
-		xmlns:c="http://java.sun.com/jstl/core">
+		xmlns:p="http://primefaces.org/ui">
 		
+<!-- <jsp:useBean id="controller" class="controller.controllerBean" scope="session">		 -->
+
 <ui:composition>
 	<p:growl id="growl" life="2000" />
 	<h:form class="titreForm">
 		<p:commandButton value="#{titre}" id="titreHeader" styleClass="titreHeader #{titre}Header" action="#{controllerBean.goTo('Home')}" ajax="false" />
 	</h:form>
-	<c:out value="${ controllerBean.connected }">Valeur par défaut</c:out>
-	<c:if test="${ connected == 'ko' }">
-	<table class="connectForm" border="0">
+	<h:panelGroup layout="block" rendered="#{!controllerBean.connected}">
+ 	<table class="connectForm" border="0">
 		<tr>
 			<td>
 				<h:form>
@@ -28,17 +28,22 @@
 				</div>
 			</td>
 			<td>
-				<p:commandButton id="connectButton" styleClass="connectButton" action="#{controllerBean.connect}" icon="ui-icon-circle-arrow-e
- " ajax="false" />
+				<p:commandButton id="connectButton" styleClass="connectButton" action="#{controllerBean.connect}" icon="ui-icon-circle-arrow-e" ajax="false" />
  			</td>
 			</h:form>
 		</tr>
 	</table>
-	</c:if>
+	</h:panelGroup>
 	
-	<c:if test="${ connected == 'ok' }">
-	ok
-	</c:if>
+	<h:panelGroup layout="block" rendered="#{controllerBean.connected}">
+		<div class="userHeader">
+			<p>Welcome #{controllerBean.user.firstName}</p>
+			<p>#{controllerBean.connectionCounter} users connected</p>
+			<h:form>
+				<p:commandButton value="logout" id="logoutButton" styleClass="logoutButton" action="#{controllerBean.goTo('Home')}" ajax="false" />
+			</h:form>
+		</div>
+	</h:panelGroup>
 	
 </ui:composition>
 </html>

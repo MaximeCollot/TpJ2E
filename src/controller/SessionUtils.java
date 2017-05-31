@@ -1,5 +1,6 @@
 package controller;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,5 +14,10 @@ public class SessionUtils {
 	public static HttpServletRequest getRequest() {
 		return (HttpServletRequest) FacesContext.getCurrentInstance()
 				.getExternalContext().getRequest();
+	}
+	
+	public static ServletContext getServletContext() {
+		return (ServletContext) FacesContext.getCurrentInstance()
+				.getExternalContext().getContext();
 	}
 }

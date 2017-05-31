@@ -13,12 +13,12 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/primefaces-6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/com.mysql.jdbc_5.1.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/javax.ws.rs-api-2.1-m07.jar"/>
 	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/jsf-api.jar"/>
 	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/jsf-impl.jar"/>
 	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/jstl-api-1.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/jstl-impl-1.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/primefaces-6.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/com.mysql.jdbc_5.1.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/javax.ws.rs-api-2.1-m07.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

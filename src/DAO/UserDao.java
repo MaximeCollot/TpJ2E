@@ -51,8 +51,7 @@ public class UserDao extends Dao<User> {
 		connexionDB = Connexion.getInstance();
 		ResultSet rs;
 		User u;
-		try (PreparedStatement ps = connexionDB
-				.prepareStatement("SELECT * FROM u$eR WHERE login=?")) {
+		try (PreparedStatement ps = connexionDB.prepareStatement("SELECT * FROM u$eR WHERE login=?")) {
 			ps.setString(1, (String) id);
 			rs = ps.executeQuery();
 			rs.next();
