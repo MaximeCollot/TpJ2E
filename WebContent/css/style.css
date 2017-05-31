@@ -81,3 +81,16 @@ h1, h2 {
 .connectInput {
 	display: grid;
 }
+
+.userHeader {
+	float: right;
+}
+
+.userHeader p {
+	margin: 2px;
+}
+
+.logoutButton {
+	font-size: x-small;
+    height: 20px;
+}
