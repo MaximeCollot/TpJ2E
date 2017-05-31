@@ -8,12 +8,14 @@ public class Recette {
 	private int preparationTime = 20;
 	private int level = 3;
 	private int nbPeople =1;
-	private String cookType ="SALAD";
+	private String cooktype ="SALAD";
 	
-	
+	public Recette() {
+		super();
+	}
 	
 	public Recette(int id, String name, String recipe, int preparationTime, int level, int nbPeople,
-			String cookType) {
+			String cooktype) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -21,7 +23,7 @@ public class Recette {
 		this.preparationTime = preparationTime;
 		this.level = level;
 		this.nbPeople = nbPeople;
-		this.cookType = cookType;
+		this.cooktype = cooktype;
 	}
 	
 	public void setId(int id) {
@@ -59,10 +61,10 @@ public class Recette {
 		this.nbPeople = nbPeople;
 	}
 	public String getCookType() {
-		return cookType;
+		return cooktype;
 	}
 	public void setCookType(String cookType) {
-		this.cookType = cookType;
+		this.cooktype = cookType;
 	}
 	public int getId() {
 		return id;
@@ -71,12 +73,11 @@ public class Recette {
 	@Override
 	public String toString() {
 		return "Recette [id=" + id + ", name=" + name + ", recipe=" + recipe + ", preparationTime=" + preparationTime
-				+ ", level=" + level + ", nbPeople=" + nbPeople + ", cookType=" + cookType + "]";
+				+ ", level=" + level + ", nbPeople=" + nbPeople + ", cookType=" + cooktype + "]";
 	}
 	
 	
 	
 
 
-	
 }

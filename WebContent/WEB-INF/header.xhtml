@@ -10,7 +10,9 @@
 <ui:composition>
 	<p:growl id="growl" life="2000" />
 	<h:form class="titreForm">
+
 		<p:commandButton value="#{titre}" id="titreHeader" styleClass="titreHeader #{titre}Header" action="#{controllerBean.goTo('Home')}" ajax="false" />
+
 	</h:form>
 	<h:panelGroup layout="block" rendered="#{!controllerBean.connected}">
  	<table class="connectForm" border="0">
