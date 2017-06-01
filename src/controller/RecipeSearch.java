@@ -12,6 +12,8 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import DAO.RecetteDao;
+import DAO.UserDao;
+import connexion.Connexion;
 import model.Recette;
 
 
@@ -41,6 +43,15 @@ public class RecipeSearch implements Serializable{
 	public RecipeSearch() {
 		super();
 		recette = new Recette();
+		try {
+			recetteDao = new RecetteDao(Connexion.getInstance());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public RecipeSearch(Recette recette, RecetteDao recetteDao) {
 		super();
@@ -58,7 +69,7 @@ public class RecipeSearch implements Serializable{
 	public String search () {
 		recipe_view = "result";
 		return "recipe";
-		/*try {
+	/*	try {
 			recette = recetteDao.search(recette);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

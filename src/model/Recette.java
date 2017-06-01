@@ -3,12 +3,12 @@ package model;
 public class Recette {
 
 	private int id =0;
-	private String name ="yoyo";
-	private String recipe= "on est bien";
-	private int preparationTime = 20;
-	private int level = 3;
-	private int nbPeople =1;
-	private String cooktype ="SALAD";
+	private String name ="init";
+	private String recipe= "init";
+	private int preparationTime = 0;
+	private int level = -1;
+	private int nbPeople =0;
+	private String cooktype ="NULL";
 	
 	public Recette() {
 		super();
