@@ -14,20 +14,17 @@
 </div>
 </ui:define>
 
+
+
 <ui:define name="content">
 <div id="content" class="content">
 
 <h1>Recipe</h1>
-Cook time = <h:outputText value="#{recipeSearch.recette.preparationTime}"/>
-Level =<h:outputText value="#{recipeSearch.recette.level}"/>
-Nb Personne =<h:outputText value="#{recipeSearch.recette.nbPeople}"/>
-Type = <h:outputText value="#{recipeSearch.recette.cooktype}"/>
-
-Recipe View = <h:outputText value="#{recipeSearch.recipe_view}" />
-
 
 <c:if test="#{recipeSearch.recipe_view == 'search'}">
+
 	<p:fieldset legend="Tell what do you want !" style="margin-bottom:20px">
+	<h:form>
 	 <div class="ui-g">
 	    
 	        <div class="ui-g-12 ui-g-nopad">
@@ -81,30 +78,45 @@ Recipe View = <h:outputText value="#{recipeSearch.recipe_view}" />
 	                	</div>
 	                	<div class="ui-g">
 	                		<p:inputText id="cooktype" value="#{recipeSearch.recette.cooktype}"  style="width: 100px"/>
-	                		<!--  <p:selectCheckboxMenu id="cooktype" value="#{recipeSearch.recette.cooktype}"  multiple="true"
+	                		<!--TODO chekbox  <p:selectCheckboxMenu id="cooktype" value="#{recipeSearch.recette.cooktype}"  multiple="true"
 	                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px"/>
 	            			<f:selectItems for="cooktype" value="#{recipeSearch.recette.cooktype}" />-->
 	                	</div>	
 	                	
 						
 					</div>
-	            </div>
-	 
-	            
-	        </div>
-	    
+	            </div>	            
+	        </div>    
 	</div>
-<h:form>
 	<p:commandButton value="Teach Me !" id="recherche_button"  action="#{recipeSearch.search}" style="position:relative;float:right" styleClass="ui-priority-primary" ajax="false" />
+
 </h:form>	
 	</p:fieldset>
 </c:if>
 
 <c:if test="#{recipeSearch.recipe_view == 'result'}">
-ça marche
-<h:form>
+<p:fieldset legend="Result" style="margin-bottom:20px">
+	 <h:form>
+
+	
+	
+	
+	<p:dataList value="#{recipeSearch.listResult}" var="recette" type="unordered" itemType="none" paginator="true" rows="5" styleClass="paginated">
+        <f:facet name="header">
+            Search Result
+        </f:facet>
+        <!--  p:commandLink update=":form:name" oncomplete="PF('carDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+            <f:setPropertyActionListener value="#{car}" target="#{dataListView.selectedCar}" />
+            <h:outputText value="#{car.brand}, #{car.year}" />
+        </p:commandLink -->
+        <h:outputText value="#{recette.name}, #{recette.recipe}" style="display:inline-block"/>
+    </p:dataList>
+	
 	<p:commandButton value="Come Back to search" id="comeback_button"  action="#{recipeSearch.comeback}" style="position:relative;float:right" styleClass="ui-priority-primary" ajax="false"/>
+	
 </h:form>
+	</p:fieldset>
+
 </c:if>
 
 

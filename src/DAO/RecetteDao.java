@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import model.CookType;
 import model.Recette;
@@ -123,6 +125,57 @@ public class RecetteDao extends Dao<Recette> {
 			connexionDB.close();
 		}
 		return res;
+	}
+	
+	
+	public List<Recette> search(Recette r) throws Exception {
+		connexionDB = Connexion.getInstance();
+		ResultSet rs;
+		String requete;
+		List <Recette> hs = new ArrayList<Recette>();
+		
+		requete = "SELECT * FROM meal WHERE ";
+		
+		if(r.getName()!="INIT"){
+			requete= requete + "name= \""+r.getName().toString()+"\" AND ";
+		}
+		if(r.getRecipe() !="INIT"){
+			requete= requete + "recipe= \""+r.getRecipe().toString()+"\" AND ";
+		}
+		if(r.getNbPeople() != -1){
+			requete= requete + "number_person= " + r.getNbPeople() +" AND ";
+		}
+		if(r.getCooktype() !="SALAD"){
+			requete= requete + "type= \""+r.getCooktype().toString()+"\" AND ";
+		}
+		
+		if(r.getPreparationTime() != -1){
+			requete= requete + "preparation_time_min= " + r.getPreparationTime() +" AND ";
+		}
+		if(r.getLevel() != -1){
+			requete= requete + "level= " + r.getLevel() +" AND ";
+		}
+		if(r.getId() != -1){
+			requete= requete + "id_meal= " + r.getId() +" AND ";
+		}	
+		requete =requete+ " 1=1 ;";
+
+		
+		PreparedStatement ps = connexionDB.prepareStatement(requete);
+			rs = ps.executeQuery();
+			rs.next();
+			r = new Recette(rs.getInt("id_meal"), rs.getString("name"), rs.getString("recipe"),rs.getInt("preparation_time_min"),rs.getInt("level"), rs.getInt("number_person"),rs.getString("type"));
+	
+								
+			while (rs.next()) {
+				hs.add(
+						new Recette(rs.getInt("id_meal"), rs.getString("name"), rs.getString("recipe"),rs.getInt("preparation_time_min"),rs.getInt("level"), rs.getInt("number_person"),rs.getString("type")));
+	 		}
+			rs.close();
+			connexionDB.close();
+		
+		
+		return  hs;
 	}
 
 }
