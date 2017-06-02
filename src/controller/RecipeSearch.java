@@ -19,11 +19,11 @@ import model.Recette;
 @SessionScoped
 
 public class RecipeSearch implements Serializable{
-	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1020826598289442019L;
 	private Recette recette;
 	private String recipe_view = "search";
 

@@ -5,6 +5,10 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:p="http://primefaces.org/ui">
 
-<h1>Bonjour </h1>
+<h1>Bonjour #{controllerBean.user.firstName}</h1>
+
+<h:form rendered="controllerBean.user.isAdmin">
+	<p:commandButton value="Administration" action="controllerBean.goTo('Admin')" />
+</h:form>
 
 </ui:composition>

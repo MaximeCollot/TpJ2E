@@ -16,8 +16,12 @@
 
 <ui:define name="content">
 <div id="content" class="content">
+<h:panelGroup layout="block" rendered="#{!controllerBean.connected}">
 <!-- <mc:registerPage/> -->
+</h:panelGroup>
+<h:panelGroup layout="block" rendered="#{controllerBean.connected}">
 <mc:accountPage/>
+</h:panelGroup>
 </div>
 </ui:define>
 
