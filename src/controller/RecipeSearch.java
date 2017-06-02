@@ -4,6 +4,8 @@ package controller;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -28,6 +30,7 @@ public class RecipeSearch implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Recette recette;
 	private String recipe_view = "search";
+	private Map <Integer, Recette> recettes;
 
 	private RecetteDao recetteDao;
 	
@@ -43,6 +46,7 @@ public class RecipeSearch implements Serializable{
 	public RecipeSearch() {
 		super();
 		recette = new Recette();
+		recettes = new HashMap<>();
 		try {
 			recetteDao = new RecetteDao(Connexion.getInstance());
 		} catch (IOException e) {
@@ -69,7 +73,7 @@ public class RecipeSearch implements Serializable{
 	public String search () {
 		recipe_view = "result";
 		return "recipe";
-	/*	try {
+		try {
 			recette = recetteDao.search(recette);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -78,19 +82,13 @@ public class RecipeSearch implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (user.getPassword().equals(tempUser.getPassword())){
-			user = tempUser;
-			connected = "ok";
-			HttpSession session = SessionUtils.getSession();
-			session.setAttribute("connected", connected);
-		}else{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Probl�me de couple login/mot de passe", null));
-		}*/
+		
 	}
 	public String comeback () {
 		
 		recipe_view = "search";
 		return "recipe";
+		recettes.clear();
 	}
 
 }
