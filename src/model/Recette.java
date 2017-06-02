@@ -2,13 +2,13 @@ package model;
 
 public class Recette {
 
-	private int id =0;
-	private String name ="init";
-	private String recipe= "init";
-	private int preparationTime = 0;
+	private int id = -1;
+	private String name ="INIT";
+	private String recipe= "INIT";
+	private int preparationTime = -1;
 	private int level = -1;
-	private int nbPeople =0;
-	private String cooktype ="NULL";
+	private int nbPeople = -1;
+	private String cooktype ="SALAD";
 	
 	public Recette() {
 		super();

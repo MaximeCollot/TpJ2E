@@ -77,7 +77,7 @@
 	                	</div>
 	                	<div class="ui-g">
 	                		<p:inputText id="cooktype" value="#{recipeSearch.recette.cooktype}"  style="width: 100px"/>
-	                		<!--  <p:selectCheckboxMenu id="cooktype" value="#{recipeSearch.recette.cooktype}"  multiple="true"
+	                		<!--TODO chekbox  <p:selectCheckboxMenu id="cooktype" value="#{recipeSearch.recette.cooktype}"  multiple="true"
 	                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px"/>
 	            			<f:selectItems for="cooktype" value="#{recipeSearch.recette.cooktype}" />-->
 	                	</div>	
@@ -96,10 +96,21 @@
 <c:if test="#{recipeSearch.recipe_view == 'result'}">
 <p:fieldset legend="Result" style="margin-bottom:20px">
 	 <h:form>
-	Cook time = <h:outputText value="#{recipeSearch.recette.preparationTime}"/>
-	Level =<h:outputText value="#{recipeSearch.recette.level}"/>
-	Nb Personne =<h:outputText value="#{recipeSearch.recette.nbPeople}"/>
-	Type = <h:outputText value="#{recipeSearch.recette.cooktype}"/>
+
+	
+	
+	
+	<p:dataList value="#{recipeSearch.listResult}" var="recette" type="unordered" itemType="none" paginator="true" rows="5" styleClass="paginated">
+        <f:facet name="header">
+            Search Result
+        </f:facet>
+        <!--  p:commandLink update=":form:name" oncomplete="PF('carDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+            <f:setPropertyActionListener value="#{car}" target="#{dataListView.selectedCar}" />
+            <h:outputText value="#{car.brand}, #{car.year}" />
+        </p:commandLink -->
+        <h:outputText value="#{recette.name}, #{recette.recipe}" style="display:inline-block"/>
+    </p:dataList>
+	
 	<p:commandButton value="Come Back to search" id="comeback_button"  action="#{recipeSearch.comeback}" style="position:relative;float:right" styleClass="ui-priority-primary" ajax="false"/>
 	
 </h:form>
