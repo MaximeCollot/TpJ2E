@@ -26,7 +26,7 @@ import model.User;
 @SessionScoped
 public class ControllerBean implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8195560381810150238L;
 	private User user;
 	private UserDao userDao;
 	private Boolean connected;
@@ -35,12 +35,7 @@ public class ControllerBean implements Serializable{
 	public ControllerBean (){
 		user = new User();
 		connected = false;
-		connectionCounter = 0;
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		session.setAttribute("connected", connected);
-		HttpServletRequest request = SessionUtils.getRequest();
-		request.setAttribute("connected", connected);
-		
+		connectionCounter = 0;	
 		
 		try {
 			userDao = new UserDao(Connexion.getInstance());
@@ -55,9 +50,11 @@ public class ControllerBean implements Serializable{
 	}
 	
 	public String goTo(String page) throws IOException {
-		
-		HttpServletRequest request = SessionUtils.getRequest();
-		request.setAttribute("connected", connected);
+		ServletContext context = SessionUtils.getServletContext();
+		if(context.getAttribute("CONNECTIONS")!=null){
+			Integer counterApp=(Integer)context.getAttribute("CONNECTIONS");
+			connectionCounter=counterApp;
+		}
 		
 		switch(page) {
 		   case "Shop" :
@@ -70,6 +67,12 @@ public class ControllerBean implements Serializable{
 				   return "emergency?faces-redirect=true";
 			case "Home" :
 				   return "home?faces-redirect=true";
+			case "Admin" :
+					if (user.isAdmin()){
+						return "admin?faces-redirect=true";
+					}else{
+						return null;
+					}
 			default : 
 				   return "home?faces-redirect=true";
 		}
@@ -113,8 +116,7 @@ public class ControllerBean implements Serializable{
 		if (user.getPassword().equals(tempUser.getPassword())){
 			user = tempUser;
 			connected = true;
-			HttpSession session = SessionUtils.getSession();
-			session.setAttribute("connected", connected);
+			connectionCounter = 1;
 			ServletContext context = SessionUtils.getServletContext();
 			if(context.getAttribute("CONNECTIONS")!=null){
 				Integer counterApp=(Integer)context.getAttribute("CONNECTIONS");
@@ -131,8 +133,6 @@ public class ControllerBean implements Serializable{
 	public void logout () {
 		user = new User();
 		connected = false;
-		HttpSession session = SessionUtils.getSession();
-		session.setAttribute("connected", connected);
 		ServletContext context = SessionUtils.getServletContext();
 		if(context.getAttribute("CONNECTIONS")!=null){
 			Integer counterApp=(Integer)context.getAttribute("CONNECTIONS");

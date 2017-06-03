@@ -21,7 +21,7 @@ public class Connexion {
 		if (connectionMySQL == null) {
 			try {
 				Properties props = new Properties();
-				FileInputStream fichier = new FileInputStream("/Users/Rudy_DEAL/git/TpJ2E/TpJ2E/src/connexion/connexion.properties");
+				FileInputStream fichier = new FileInputStream("C:/Users/Maxime/Documents/TpJ2E/src/connexion/connexion.properties");
 				props.load(fichier);
 				MysqlDataSource mds = new MysqlDataSource();
 				mds.setUser(props.getProperty("user"));

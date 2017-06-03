@@ -39,7 +39,7 @@ public class UserDao extends Dao<User> {
 		while (rs.next()) {
 			hs.put(rs.getString(1),
 					new User(rs.getString("firstName"), rs.getString("lastName"), rs.getDate("birthday").toString(),
-							rs.getString("email"), rs.getString("login"), rs.getString("password"), rs.getBoolean("isAdmin")));
+							rs.getString("email"), rs.getString("login"), rs.getString("password"), rs.getBoolean("isAdmin"), rs.getString("lastConnection"), rs.getInt("connectionDuration")));
 		}
 		rs.close();
 		connexionDB.close();
@@ -56,7 +56,7 @@ public class UserDao extends Dao<User> {
 			rs = ps.executeQuery();
 			rs.next();
 			u = new User(rs.getString("firstName"), rs.getString("lastName"), rs.getDate("birthday").toString(),
-					rs.getString("email"), rs.getString("login"), rs.getString("pa$$woRd"), rs.getBoolean("isAdmin"));
+					rs.getString("email"), rs.getString("login"), rs.getString("pa$$woRd"), rs.getBoolean("isAdmin"), rs.getString("lastConnection"), rs.getInt("connectionDuration"));
 					
 		}
 		rs.close();
@@ -117,7 +117,7 @@ public class UserDao extends Dao<User> {
 		boolean res = true;
 		connexionDB = Connexion.getInstance();
 		try (PreparedStatement ps = connexionDB
-				.prepareStatement("UPDATE u$eR SET firstName=?, lastName=?, birthday=?, email=?, pa$$word=?, isAdmin=? where login=?")) {
+				.prepareStatement("UPDATE u$eR SET firstName=?, lastName=?, birthday=?, email=?, pa$$word=?, isAdmin=?, lastConnection=?, connectionduration=? where login=?")) {
 			ps.setString(1, u.getFirstName());
 			ps.setString(2, u.getLastName());
 			ps.setString(3, u.getDdn());
@@ -125,6 +125,8 @@ public class UserDao extends Dao<User> {
 			ps.setString(5, u.getPassword());
 			ps.setBoolean(6, u.isAdmin());
 			ps.setString(7, u.getLogin());
+			ps.setString(8, u.getLastConnection().toString());
+			ps.setLong(9, u.getConnectionDuration());
 			try {
 				ps.executeUpdate();
 			} catch (SQLException e) {

@@ -18,7 +18,8 @@ h1, h2 {
 }
 
 .header {
-	height: 10%
+	height: 10%;
+	display: flex;
 }
 
 .content {
@@ -64,14 +65,24 @@ h1, h2 {
 	background-color: blue;
 }
 
+.AdminHeader {
+	background-color: red;
+}
+
 .titreForm {
 	height: 100%;
 	width: 30%;
 	float: left;
 }
-.titreHeader {
+
+.backHeader {
 	font-size: x-large;
 	height: 100%;	
+}
+
+.titleHeader {
+	margin: auto;
+	font-size: x-large;
 }
 
 .connectForm {

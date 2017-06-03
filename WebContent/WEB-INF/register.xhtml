@@ -24,9 +24,9 @@
 		</tr>
 		<tr>
 			<td>Birthday</td>
-			<h:inputDate id="birthday" value="#{user.birthday}" required="true">
-				<f:validator validatorId="validators.birthday" />
-			</h:inputText>
+<!-- 			<h:inputDate id="birthday" value="#{user.birthday}" required="true"> -->
+<!-- 				<f:validator validatorId="validators.birthday" /> -->
+<!-- 			</h:inputText> -->
 			<td><h:message for="birthday" showDetail="true" style=" color:red" /></td>
 		</tr>
 		<tr>
@@ -47,7 +47,7 @@
 			<td>Password</td>
 			<h:inputSecret id="password" value="#{user.password}" required="true">
 				<f:validator validatorId="validators.password" />
-			</h:inputText>
+			</h:inputSecret>
 			<td><h:message for="password" showDetail="true" style=" color:red" /></td>
 		</tr>
 		<tr>
