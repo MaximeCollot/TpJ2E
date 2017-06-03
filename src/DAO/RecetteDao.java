@@ -136,37 +136,36 @@ public class RecetteDao extends Dao<Recette> {
 		
 		requete = "SELECT * FROM meal WHERE ";
 		
-		if(r.getName()!="INIT"){
-			requete= requete + "name= \""+r.getName().toString()+"\" AND ";
+		if(!r.getName().equals("INIT")){
+			requete= requete + "name = \""+r.getName().toString()+"\" AND ";
 		}
-		if(r.getRecipe() !="INIT"){
-			requete= requete + "recipe= \""+r.getRecipe().toString()+"\" AND ";
+		if(!r.getRecipe().equals("INIT")){
+			requete= requete + "recipe = \""+r.getRecipe().toString()+"\" AND ";
 		}
 		if(r.getNbPeople() != -1){
-			requete= requete + "number_person= " + r.getNbPeople() +" AND ";
-		}
-		if(r.getCooktype() !="SALAD"){
-			requete= requete + "type= \""+r.getCooktype().toString()+"\" AND ";
+			requete= requete + "number_person = " + r.getNbPeople() +" AND ";
 		}
 		
 		if(r.getPreparationTime() != -1){
-			requete= requete + "preparation_time_min= " + r.getPreparationTime() +" AND ";
+			requete= requete + "preparation_time_min = " + r.getPreparationTime() +" AND ";
 		}
 		if(r.getLevel() != -1){
-			requete= requete + "level= " + r.getLevel() +" AND ";
+			requete= requete + "level = " + r.getLevel() +" AND ";
 		}
 		if(r.getId() != -1){
-			requete= requete + "id_meal= " + r.getId() +" AND ";
-		}	
+			requete= requete + "id_meal = " + r.getId() +" AND ";
+		}
+		if(!r.getCooktype().equals(" ")){
+			requete= requete + "type = \""+r.getCooktype().toString()+"\" AND ";
+		}
+		
+		//fonction un peu crade permettant la recherche, le "1=1;" permet de finir la requete après un "AND"
 		requete =requete+ " 1=1 ;";
-
+		
 		
 		PreparedStatement ps = connexionDB.prepareStatement(requete);
+		
 			rs = ps.executeQuery();
-			rs.next();
-			r = new Recette(rs.getInt("id_meal"), rs.getString("name"), rs.getString("recipe"),rs.getInt("preparation_time_min"),rs.getInt("level"), rs.getInt("number_person"),rs.getString("type"));
-	
-								
 			while (rs.next()) {
 				hs.add(
 						new Recette(rs.getInt("id_meal"), rs.getString("name"), rs.getString("recipe"),rs.getInt("preparation_time_min"),rs.getInt("level"), rs.getInt("number_person"),rs.getString("type")));

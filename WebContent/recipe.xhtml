@@ -96,7 +96,7 @@
 
 <c:if test="#{recipeSearch.recipe_view == 'result'}">
 <p:fieldset legend="Result" style="margin-bottom:20px">
-	 <h:form>
+	 <h:form id="form">
 
 	
 	
@@ -105,12 +105,44 @@
         <f:facet name="header">
             Search Result
         </f:facet>
-        <!--  p:commandLink update=":form:name" oncomplete="PF('carDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
-            <f:setPropertyActionListener value="#{car}" target="#{dataListView.selectedCar}" />
-            <h:outputText value="#{car.brand}, #{car.year}" />
-        </p:commandLink -->
+        <p:commandLink update=":form:recetteDetail" oncomplete="PF('recipeDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+            <f:setPropertyActionListener value="#{recette}" target="#{recipeSearch.selectedRecette}" />
+            <h:outputText value="#{recette.name}" />
+        </p:commandLink >
         <h:outputText value="#{recette.name}, #{recette.recipe}" style="display:inline-block"/>
     </p:dataList>
+    
+    <p:dialog header="Recette Info" widgetVar="recipeDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+        <p:outputPanel id="recetteDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty recipeSearch.selectedRecette}" columnClasses="label,value">
+                <f:facet name="header">
+                    <p:graphicImage name="demo/images/car/#{dataListView.selectedCar.brand}-big.gif"/> 
+                </f:facet>
+ 
+                <h:outputText value="Id:" />
+                <h:outputText value="#{recipeSearch.selectedRecette.id}" />
+ 
+                <h:outputText value="Name:" />
+                <h:outputText value="#{recipeSearch.selectedRecette.name}" />
+                
+                <h:outputText value="Recipe:" />
+                <h:outputText value="#{recipeSearch.selectedRecette.recipe}" />
+                
+                <h:outputText value="Preparation Time:" />
+                <h:outputText value="#{recipeSearch.selectedRecette.preparationTime}" />
+                
+                <h:outputText value="Level:" />
+                <h:outputText value="#{recipeSearch.selectedRecette.level}" />
+                
+                <h:outputText value="Number of people:" />
+                <h:outputText value="#{recipeSearch.selectedRecette.nbPeople}" />
+                
+                <h:outputText value="Type:" />
+                <h:outputText value="#{recipeSearch.selectedRecette.cooktype}" />
+                
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
 	
 	<p:commandButton value="Come Back to search" id="comeback_button"  action="#{recipeSearch.comeback}" style="position:relative;float:right" styleClass="ui-priority-primary" ajax="false"/>
 	
