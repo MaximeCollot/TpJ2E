@@ -34,6 +34,18 @@ public class RecipeSearch implements Serializable{
 	private String recipe_view = "search";
 	private List <Recette> listResult;
 	
+	private Recette selectedRecette;
+	
+
+	public Recette getSelectedRecette() {
+		System.out.println("test_get");
+		return selectedRecette;
+	}
+
+	public void setSelectedRecette(Recette selectedRecette) {
+		System.out.println("test_set");
+		this.selectedRecette = selectedRecette;
+	}
 
 	public List<Recette> getListResult() {
 		return listResult;

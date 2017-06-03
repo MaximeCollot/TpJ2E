@@ -8,7 +8,7 @@ public class Recette {
 	private int preparationTime = -1;
 	private int level = -1;
 	private int nbPeople = -1;
-	private String cooktype ="SALAD";
+	private String cooktype = " ";
 	
 	public Recette() {
 		super();
