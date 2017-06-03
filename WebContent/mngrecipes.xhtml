@@ -1,0 +1,37 @@
+<ui:composition
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:mc="http://localhost/TpJ2E/mesComposants"
+		template="/template.xhtml">
+		
+		
+<ui:define name="header">
+<div id="header" class="header AdminHeader">
+<mc:adminHeaderContent titre="Administration"/>
+</div>
+</ui:define>
+
+<ui:define name="content">
+<div id="content" class="content">
+	<p:dataList value="#{adminControllerBean.recipeList}" var="recette" type="unordered" itemType="none" paginator="true" rows="5" styleClass="paginated adminList">
+        <f:facet name="header">
+            <table><tr>
+            	<td>Title</td>
+            	<td></td>
+            </tr></table>
+        </f:facet>
+        <table><tr>
+        	<td><h:outputText value="#{recette.name}"/></td>
+        	<td>
+        		<p:commandButton icon="ui-icon-closethick"></p:commandButton>
+        		<p:commandButton icon="ui-icon-search"></p:commandButton>
+        	</td>
+        </tr></table>
+    </p:dataList>
+</div>
+</ui:define>
+
+</ui:composition>

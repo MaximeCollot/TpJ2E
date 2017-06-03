@@ -6,38 +6,39 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.core.ApplicationContext;
-
-import com.sun.net.httpserver.HttpContext;
-import com.sun.org.apache.bcel.internal.generic.CPInstruction;
-
+import DAO.RecetteDao;
 import DAO.UserDao;
 import connexion.Connexion;
+import model.Recette;
 import model.User;
 
+@SessionScoped
 @ManagedBean
 public class AdminControllerBean implements Serializable{
 	
 	private static final long serialVersionUID = 6327343996376470073L;
 	private User admin;
 	private UserDao userDao;
+	private RecetteDao recipeDao;
 	private Boolean connected;
 	private LocalDateTime connectionDateTime;
+	private List<User> userList;
+	private List<Recette> recipeList;
 	
 	public AdminControllerBean (){
 		admin = new User();
 		connected = false;
+		userList = new ArrayList<>();
+		recipeList = new ArrayList<>();
 		
 		try {
 			userDao = new UserDao(Connexion.getInstance());
@@ -49,19 +50,28 @@ public class AdminControllerBean implements Serializable{
 			e.printStackTrace();
 		}
 		
+		try {
+			recipeDao = new RecetteDao(Connexion.getInstance());
+		} catch (IOException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public String goTo(String page) throws IOException {
 		
 		switch(page) {
 		   case "MngUsers" :
-		      return "mngUsers?faces-redirect=true";
+			   updateUserList();
+			   return "mngusers?faces-redirect=true";
 			case "MngRecipes" :
-				   return "mngRecipes?faces-redirect=true";
+				updateRecipeList();
+				return "mngrecipes?faces-redirect=true";
 			case "AdminHome" :
-					return "admin?faces-redirect=true";
-			default : 
-				   return "admin?faces-redirect=true";
+				return "admin?faces-redirect=true";
+			default :
+				return "admin?faces-redirect=true";
 		}
 	}
 	
@@ -79,6 +89,22 @@ public class AdminControllerBean implements Serializable{
 
 	public void setConnected(Boolean connected) {
 		this.connected = connected;
+	}
+
+	public List<User> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
+	}
+
+	public List<Recette> getRecipeList() {
+		return recipeList;
+	}
+
+	public void setRecipeList(List<Recette> recipeList) {
+		this.recipeList = recipeList;
 	}
 
 	public void connect () {
@@ -99,6 +125,24 @@ public class AdminControllerBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Vous êtes connectés !", null));
 		}else{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Problème de couple login/mot de passe", null));
+		}
+	}
+	
+	private void updateUserList(){
+		try {
+			userList = new ArrayList<>(userDao.selectAll().values());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void updateRecipeList(){
+		try {
+			recipeList = new ArrayList<>(recipeDao.selectAll().values());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

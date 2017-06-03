@@ -23,7 +23,7 @@ h1, h2 {
 }
 
 .content {
-	height: 85%;
+	height: 82%;
 }
 
 .footer {
@@ -104,4 +104,8 @@ h1, h2 {
 .logoutButton {
 	font-size: x-small;
     height: 20px;
+}
+
+.adminList {
+	width: 50%;
 }
