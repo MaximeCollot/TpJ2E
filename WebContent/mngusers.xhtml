@@ -1,0 +1,77 @@
+<ui:composition
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:mc="http://localhost/TpJ2E/mesComposants"
+		template="/template.xhtml">
+		
+		
+<ui:define name="header">
+<div id="header" class="header AdminHeader">
+<mc:adminHeaderContent titre="Administration"/>
+</div>
+</ui:define>
+
+<ui:define name="content">
+<div id="content" class="content">
+		<p:dataList value="#{adminControllerBean.userList}" var="user" type="unordered" itemType="none" paginator="true" rows="5" styleClass="paginated">
+        <f:facet name="header">
+            <table><tr>
+            	<td>Name</td>
+            	<td>Login</td>
+            	<td>Admin</td>
+            	<td></td>
+            </tr></table>
+        </f:facet>
+        <table><tr>
+        	<td><h:outputText value="#{user.lastName}"/></td>
+        	<td><h:outputText value="#{user.login}"/></td>
+        	<td><h:outputText value="#{user.admin}"/></td>
+        	<td>
+        		<p:commandLink title="Remove User" styleClass="ui-icon ui-icon-closethick">
+        			<f:setPropertyActionListener value="#{user}" target="#{adminControllerBean.removeUser}" />
+        		</p:commandLink>
+        		<p:commandLink update=":userDetail" oncomplete="PF('userDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search">
+		           <f:setPropertyActionListener value="#{user}" target="#{adminControllerBean.selectedUser}" />
+		       </p:commandLink >
+        	</td>
+        </tr></table>
+    </p:dataList>
+    
+    <p:dialog header="User Info" widgetVar="userDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+        <p:outputPanel id="userDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty adminControllerBean.selectedUser}" columnClasses="label,value">
+ 
+                <h:outputText value="First Name:" />
+                <h:outputText value="#{adminControllerBean.selectedUser.firstName}" />
+ 
+                <h:outputText value="Last Name:" />
+                <h:outputText value="#{adminControllerBean.selectedUser.lastName}" />
+                
+                <h:outputText value="BirthDay:" />
+                <h:outputText value="#{adminControllerBean.selectedUser.ddn}" />
+                
+                <h:outputText value="Email:" />
+                <h:outputText value="#{adminControllerBean.selectedUser.email}" />
+                
+                <h:outputText value="Login:" />
+                <h:outputText value="#{adminControllerBean.selectedUser.login}" />
+                
+                <h:outputText value="Password:" />
+                <h:outputText value="#{adminControllerBean.selectedUser.password}" />
+                
+                <h:outputText value="Password:" />
+                <h:outputText value="#{adminControllerBean.selectedUser.password}" />
+                
+                <h:outputText value="Admin:" />
+                <h:outputText value="#{adminControllerBean.selectedUser.admin}" />
+                
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+</div>
+</ui:define>
+
+</ui:composition>

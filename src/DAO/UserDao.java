@@ -39,7 +39,7 @@ public class UserDao extends Dao<User> {
 		while (rs.next()) {
 			hs.put(rs.getString(1),
 					new User(rs.getString("firstName"), rs.getString("lastName"), rs.getDate("birthday").toString(),
-							rs.getString("email"), rs.getString("login"), rs.getString("password"), rs.getBoolean("isAdmin"), rs.getString("lastConnection"), rs.getInt("connectionDuration")));
+							rs.getString("email"), rs.getString("login"), rs.getString("pa$$word"), rs.getBoolean("isAdmin"), rs.getString("lastConnection"), rs.getInt("connectionDuration")));
 		}
 		rs.close();
 		connexionDB.close();

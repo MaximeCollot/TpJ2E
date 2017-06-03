@@ -11,12 +11,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.catalina.core.ApplicationContext;
-
-import com.sun.net.httpserver.HttpContext;
 
 import DAO.UserDao;
 import connexion.Connexion;
