@@ -16,7 +16,25 @@
 
 <ui:define name="content">
 <div id="content" class="content">
-	users
+		<p:dataList value="#{adminControllerBean.userList}" var="user" type="unordered" itemType="none" paginator="true" rows="5" styleClass="paginated adminList">
+        <f:facet name="header">
+            <table><tr>
+            	<td>Name</td>
+            	<td>Login</td>
+            	<td>Admin</td>
+            	<td></td>
+            </tr></table>
+        </f:facet>
+        <table><tr>
+        	<td><h:outputText value="#{user.lastName}"/></td>
+        	<td><h:outputText value="#{user.login}"/></td>
+        	<td><h:outputText value="#{user.admin}"/></td>
+        	<td>
+        		<p:commandButton icon="ui-icon-closethick"></p:commandButton>
+        		<p:commandButton icon="ui-icon-search"></p:commandButton>
+        	</td>
+        </tr></table>
+    </p:dataList>
 </div>
 </ui:define>
 
