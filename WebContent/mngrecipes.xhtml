@@ -16,7 +16,7 @@
 
 <ui:define name="content">
 <div id="content" class="content">
-	<p:dataList value="#{adminControllerBean.recipeList}" var="recette" type="unordered" itemType="none" paginator="true" rows="5" styleClass="paginated adminList">
+	<p:dataList value="#{adminControllerBean.recipeList}" var="recette" type="unordered" itemType="none" paginator="true" rows="5" styleClass="paginated">
         <f:facet name="header">
             <table><tr>
             	<td>Title</td>
@@ -26,11 +26,44 @@
         <table><tr>
         	<td><h:outputText value="#{recette.name}"/></td>
         	<td>
-        		<p:commandButton icon="ui-icon-closethick"></p:commandButton>
-        		<p:commandButton icon="ui-icon-search"></p:commandButton>
+        		<p:commandLink title="Remove Recipe" styleClass="ui-icon ui-icon-closethick">
+        			<f:setPropertyActionListener value="#{recette}" target="#{adminControllerBean.removeRecipe}" />
+        		</p:commandLink>
+        		<p:commandLink update=":recetteDetail" oncomplete="PF('recipeDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search">
+		           <f:setPropertyActionListener value="#{recette}" target="#{adminControllerBean.selectedRecipe}" />
+		       </p:commandLink >
         	</td>
         </tr></table>
     </p:dataList>
+    
+    <p:dialog header="Recette Info" widgetVar="recipeDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+        <p:outputPanel id="recetteDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty adminControllerBean.selectedRecipe}" columnClasses="label,value">
+ 
+                <h:outputText value="Id:" />
+                <h:outputText value="#{adminControllerBean.selectedRecipe.id}" />
+ 
+                <h:outputText value="Name:" />
+                <h:outputText value="#{adminControllerBean.selectedRecipe.name}" />
+                
+                <h:outputText value="Recipe:" />
+                <h:outputText value="#{adminControllerBean.selectedRecipe.recipe}" />
+                
+                <h:outputText value="Preparation Time:" />
+                <h:outputText value="#{adminControllerBean.selectedRecipe.preparationTime}" />
+                
+                <h:outputText value="Level:" />
+                <h:outputText value="#{adminControllerBean.selectedRecipe.level}" />
+                
+                <h:outputText value="Number of people:" />
+                <h:outputText value="#{adminControllerBean.selectedRecipe.nbPeople}" />
+                
+                <h:outputText value="Type:" />
+                <h:outputText value="#{adminControllerBean.selectedRecipe.cooktype}" />
+                
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
 </div>
 </ui:define>
 

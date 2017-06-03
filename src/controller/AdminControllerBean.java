@@ -32,7 +32,9 @@ public class AdminControllerBean implements Serializable{
 	private Boolean connected;
 	private LocalDateTime connectionDateTime;
 	private List<User> userList;
+	private User selectedUser;
 	private List<Recette> recipeList;
+	private Recette selectedRecipe;
 	
 	public AdminControllerBean (){
 		admin = new User();
@@ -99,6 +101,14 @@ public class AdminControllerBean implements Serializable{
 		this.userList = userList;
 	}
 
+	public User getSelectedUser() {
+		return selectedUser;
+	}
+
+	public void setSelectedUser(User selectedUser) {
+		this.selectedUser = selectedUser;
+	}
+
 	public List<Recette> getRecipeList() {
 		return recipeList;
 	}
@@ -144,6 +154,22 @@ public class AdminControllerBean implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public Recette getSelectedRecipe() {
+		return selectedRecipe;
+	}
+
+	public void setSelectedRecipe(Recette selectedRecipe) {
+		this.selectedRecipe = selectedRecipe;
+	}
+	
+	public void removeUser(User user){
+		System.out.println(user);
+	}
+
+	public void removeRecipe(Recette recette) {
+		System.out.println(recette);
 	}
 	
 	@PreDestroy
