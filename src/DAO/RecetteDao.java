@@ -162,7 +162,7 @@ public class RecetteDao extends Dao<Recette> {
 		//fonction un peu crade permettant la recherche, le "1=1;" permet de finir la requete après un "AND"
 		requete =requete+ " 1=1 ;";
 		
-		
+		System.out.println(requete);
 		PreparedStatement ps = connexionDB.prepareStatement(requete);
 		
 			rs = ps.executeQuery();

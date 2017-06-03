@@ -38,12 +38,10 @@ public class RecipeSearch implements Serializable{
 	
 
 	public Recette getSelectedRecette() {
-		System.out.println("test_get");
 		return selectedRecette;
 	}
 
 	public void setSelectedRecette(Recette selectedRecette) {
-		System.out.println("test_set");
 		this.selectedRecette = selectedRecette;
 	}
 
@@ -102,6 +100,7 @@ public class RecipeSearch implements Serializable{
 	}
 	
 	public String search () throws Exception {
+		System.out.println(recette.toString());
 		recipe_view = "result";
 		listResult = recetteDao.search(recette);
 		

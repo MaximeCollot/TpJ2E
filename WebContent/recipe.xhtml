@@ -77,10 +77,14 @@
 	                		<h:outputLabel for="cooktype" value= "Cook Type"/>
 	                	</div>
 	                	<div class="ui-g">
-	                		<p:inputText id="cooktype" value="#{recipeSearch.recette.cooktype}"  style="width: 100px"/>
-	                		<!--TODO chekbox  <p:selectCheckboxMenu id="cooktype" value="#{recipeSearch.recette.cooktype}"  multiple="true"
-	                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px"/>
-	            			<f:selectItems for="cooktype" value="#{recipeSearch.recette.cooktype}" />-->
+					        <p:selectOneListbox id="basic" value="#{recipeSearch.recette.cooktype}">
+					        	<f:selectItem itemLabel=" " itemValue=" " />
+					            <f:selectItem itemLabel="SALAD" itemValue="SALAD" />
+					            <f:selectItem itemLabel="MEAL" itemValue="MEAL" />
+					            <f:selectItem itemLabel="FISH" itemValue="FISH" />				            
+					            <f:selectItem itemLabel="DESSERT" itemValue="DESSERT" />
+					        </p:selectOneListbox>
+	   
 	                	</div>	
 	                	
 						
@@ -116,7 +120,8 @@
         <p:outputPanel id="recetteDetail" style="text-align:center;">
             <p:panelGrid  columns="2" rendered="#{not empty recipeSearch.selectedRecette}" columnClasses="label,value">
                 <f:facet name="header">
-                    <p:graphicImage name="demo/images/car/#{dataListView.selectedCar.brand}-big.gif"/> 
+                <img src="#{recipeSearch.selectedRecette.photo}" alt="type  Logo" class="type_logo" width="80" height="80"/>
+                    <!--  <p:graphicImage name="demo/images/car/#{dataListView.selectedCar.brand}-big.gif"/--> 
                 </f:facet>
  
                 <h:outputText value="Id:" />
