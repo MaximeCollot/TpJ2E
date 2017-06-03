@@ -5,9 +5,15 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import DAO.RecetteDao;
 
@@ -94,7 +100,7 @@ public class RecipeSearch implements Serializable{
 	}
 	
 	public String search () throws Exception {
-		System.out.println(recette.toString());
+		
 		recipe_view = "result";
 		listResult = recetteDao.search(recette);
 		

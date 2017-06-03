@@ -28,7 +28,7 @@ public class Recette {
 		this.nbPeople = nbPeople;
 		this.cooktype = cooktype;
 		setPhoto("");
-		System.out.println(this.photo);
+		
 	}
 	
 	
