@@ -1,7 +1,7 @@
 package model;
 
 public enum CookType {
-	SALAD("SALAD"), MEAL("MEAL"), FISH("FISH"), DESSERT("DESSERT"), NONE("NONE");
+	SALAD("SALAD"), MEAL("MEAL"), FISH("FISH"), DESSERT("DESSERT");
 	
 	private String type;
 	
