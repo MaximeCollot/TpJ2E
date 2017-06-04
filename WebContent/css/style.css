@@ -46,6 +46,13 @@ h1, h2 {
 	font-size: xx-large;
 }
 
+.adminMenuButton {
+	width: 35%;
+	height: 90%;
+	margin-left: 20px;
+	font-size: xx-large;
+}
+
 .emergencyButton {
 	background-color: orange;
 }
@@ -118,4 +125,8 @@ h1, h2 {
 .deleteButton {
 	width: 16px;
 	height: 16px;
+}
+
+.inputTime input {
+	width: 100px;
 }

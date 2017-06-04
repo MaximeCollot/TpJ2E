@@ -26,8 +26,8 @@
 	
 	<h:panelGroup layout="block" rendered="#{adminControllerBean.connected}">
 		<h:form class="menuForm">
-			<p:commandButton value="Manage Users" id="MngUsersButton" styleClass="menuButton" action="#{adminControllerBean.goTo('MngUsers')}" icon="ui-icon-person" ajax="false" />
-			<p:commandButton value="Manage Recipes" id="MngRecipeButton" styleClass="menuButton" action="#{adminControllerBean.goTo('MngRecipes')}" icon="ui-icon-script" ajax="false" />
+			<p:commandButton value="Manage Users" id="MngUsersButton" styleClass="adminMenuButton" action="#{adminControllerBean.goTo('MngUsers')}" icon="ui-icon-person" ajax="false" />
+			<p:commandButton value="Manage Recipes" id="MngRecipeButton" styleClass="adminMenuButton" action="#{adminControllerBean.goTo('MngRecipes')}" icon="ui-icon-script" ajax="false" />
 		</h:form>
 	</h:panelGroup>
 </div>

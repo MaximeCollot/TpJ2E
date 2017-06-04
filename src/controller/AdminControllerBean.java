@@ -33,14 +33,18 @@ public class AdminControllerBean implements Serializable{
 	private LocalDateTime connectionDateTime;
 	private List<User> userList;
 	private User selectedUser;
+	private User newUser;
 	private List<Recette> recipeList;
 	private Recette selectedRecipe;
+	private Recette newRecipe;
 	
 	public AdminControllerBean (){
 		admin = new User();
 		connected = false;
 		userList = new ArrayList<>();
+		newUser = new User();
 		recipeList = new ArrayList<>();
+		newRecipe = new Recette();
 		
 		try {
 			userDao = new UserDao(Connexion.getInstance());
@@ -109,6 +113,14 @@ public class AdminControllerBean implements Serializable{
 		this.selectedUser = selectedUser;
 	}
 
+	public User getNewUser() {
+		return newUser;
+	}
+
+	public void setNewUser(User newUser) {
+		this.newUser = newUser;
+	}
+
 	public List<Recette> getRecipeList() {
 		return recipeList;
 	}
@@ -164,6 +176,14 @@ public class AdminControllerBean implements Serializable{
 		this.selectedRecipe = selectedRecipe;
 	}
 	
+	public Recette getNewRecipe() {
+		return newRecipe;
+	}
+
+	public void setNewRecipe(Recette newRecipe) {
+		this.newRecipe = newRecipe;
+	}
+
 	public String removeUser(User user) throws IOException{
 		try {
 			userDao.delete(user);
@@ -183,6 +203,25 @@ public class AdminControllerBean implements Serializable{
 			e.printStackTrace();
 		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Recipe deleted !", null));
+		return goTo("MngRecipes");
+	}
+	
+	public String saveRecipe() throws IOException {
+		if (selectedRecipe.getId() != -1){
+			try {
+				recipeDao.update(selectedRecipe);
+			} catch (SQLException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				recipeDao.insert(selectedRecipe);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return goTo("MngRecipes");
 	}
 	

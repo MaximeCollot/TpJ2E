@@ -30,26 +30,33 @@
 	       </p:commandLink >
 		</div>
     </p:dataList>
+    <p:commandLink update=":recetteDetail" oncomplete="PF('recipeDialog').show()" title="View Detail" styleClass="ui-button ui-corner-all ui-state-default">
+        <h:outputText value="Add Recipe" />
+        <f:setPropertyActionListener value="#{adminControllerBean.newRecipe}" target="#{adminControllerBean.selectedRecipe}" />
+    </p:commandLink >
     
     <p:dialog header="Recette Info" widgetVar="recipeDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
         <p:outputPanel id="recetteDetail" style="text-align:center;">
         	<h:form>
+        	<h:outputLabel for="recipeTitle" value="Title" />
+        	<p:inputText id="recipeTitle" value="#{adminControllerBean.selectedRecipe.name}"/>
+        	
 	 		<div class="ui-g">    
 	        <div class="ui-g-12 ui-g-nopad">
 	            <div class="ui-g">
 	                <div class="ui-g-12 ui-md-1">
-	                	<img src="../ressource/duration.png" alt="preparationTime - Logo" class="preparationTime_logo" width="80" height="80"/>
+	                	<img src="../ressource/duration.png" alt="preparationTime - Logo" class="preparationTime_logo" width="45" height="45"/>
 	                </div>
 	                <div class="ui-g-12 ui-md-5">
 	                	<div class="ui-g">
 	                		<h:outputLabel for="preparationTime" value="Preparation duration" />
 	                	</div>
 	                	<div class="ui-g">
-	                		<p:spinner id="preparationTime" value="#{adminControllerBean.selectedRecipe.preparationTime}" stepFactor="1" />
+	                		<p:spinner id="preparationTime" value="#{adminControllerBean.selectedRecipe.preparationTime}" stepFactor="1" styleClass="inputTime"/>
 	                	</div>
 	       			</div>
 	                <div class="ui-g-12 ui-md-1">
-	                	<img src="../ressource/expertise.png" alt="Expertise - Logo" class="expertise_logo" width="80" height="80"/>               	
+	                	<img src="../ressource/expertise.png" alt="Expertise - Logo" class="expertise_logo" width="45" height="45"/>               	
 	                </div>
 	                <div class="ui-g-12 ui-md-5">
 	                	<div class="ui-g">
@@ -62,7 +69,7 @@
 	            </div>
 	            <div class="ui-g">
 	                <div class="ui-g-12 ui-md-1">
-	                	<img src="../ressource/nb_person.png" alt="Number of Person - Logo" class="nb_person_logo" width="80" height="80"/>               	
+	                	<img src="../ressource/nb_person.png" alt="Number of Person - Logo" class="nb_person_logo" width="45" height="45"/>               	
 	                </div>
 	                <div class="ui-g-12 ui-md-5">
 	                	<div class="ui-g">
@@ -76,23 +83,28 @@
 	                	</div>				
 	       			</div>
 	                <div class="ui-g-12 ui-md-1">
-	                	<img src="../ressource/type.png" alt="Type - Logo" class="type_logo" width="80" height="80"/>               	
+	                	<img src="../ressource/type.png" alt="Type - Logo" class="type_logo" width="45" height="45"/>               	
 	                </div>
 	                <div class="ui-g-12 ui-md-5">
 	                	<div class="ui-g">
 	                		<h:outputLabel for="cooktype" value= "Cook Type"/>
 	                	</div>
 	                	<div class="ui-g">
-	                		<p:inputText id="cooktype" value="#{adminControllerBean.selectedRecipe.cooktype}"  style="width: 100px"/>
-	                		<!--TODO chekbox  <p:selectCheckboxMenu id="cooktype" value="#{recipeSearch.recette.cooktype}"  multiple="true"
-	                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px"/>
-	            			<f:selectItems for="cooktype" value="#{recipeSearch.recette.cooktype}" />-->
+					        <p:selectOneListbox id="cooktype" value="#{adminControllerBean.selectedRecipe.cooktype}">
+					        	<f:selectItem itemLabel=" " itemValue=" " />
+					            <f:selectItem itemLabel="SALAD" itemValue="SALAD" />
+					            <f:selectItem itemLabel="MEAL" itemValue="MEAL" />
+					            <f:selectItem itemLabel="FISH" itemValue="FISH" />				            
+					            <f:selectItem itemLabel="DESSERT" itemValue="DESSERT" />
+					        </p:selectOneListbox>
+	   
 	                	</div>	
 					</div>
 	            </div>	            
 	        </div>    
 			</div>
-			<p:commandButton value="Save" action="#{adminControllerBean.search}" style="position:relative;float:right" styleClass="ui-priority-primary" ajax="false" />
+        	<p:inputTextarea id="recipeInstruction" value="#{adminControllerBean.selectedRecipe.recipe}" style="width: 90%;"/>
+			<p:commandButton value="Save" action="#{adminControllerBean.saveRecipe()}"/>
 			</h:form>	
         </p:outputPanel>
     </p:dialog>
