@@ -105,7 +105,6 @@ public class UserDao extends Dao<User> {
 				ps.cancel();
 				res = false;
 			}
-			connexionDB.commit();
 			ps.close();
 			connexionDB.close();
 		}

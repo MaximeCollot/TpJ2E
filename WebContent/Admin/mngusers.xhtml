@@ -5,7 +5,7 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:p="http://primefaces.org/ui"
 		xmlns:mc="http://localhost/TpJ2E/mesComposants"
-		template="/template.xhtml">
+		template="adminTemplate.xhtml">
 		
 		
 <ui:define name="header">
@@ -18,26 +18,21 @@
 <div id="content" class="content">
 		<p:dataList value="#{adminControllerBean.userList}" var="user" type="unordered" itemType="none" paginator="true" rows="5" styleClass="paginated">
         <f:facet name="header">
-            <table><tr>
-            	<td>Name</td>
-            	<td>Login</td>
-            	<td>Admin</td>
-            	<td></td>
-            </tr></table>
+            	<span>Name</span>
+            	<span>Login</span>
+            	<span>Admin</span>
         </f:facet>
-        <table><tr>
-        	<td><h:outputText value="#{user.lastName}"/></td>
-        	<td><h:outputText value="#{user.login}"/></td>
-        	<td><h:outputText value="#{user.admin}"/></td>
-        	<td>
-        		<p:commandLink title="Remove User" styleClass="ui-icon ui-icon-closethick">
-        			<f:setPropertyActionListener value="#{user}" target="#{adminControllerBean.removeUser}" />
-        		</p:commandLink>
-        		<p:commandLink update=":userDetail" oncomplete="PF('userDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search">
-		           <f:setPropertyActionListener value="#{user}" target="#{adminControllerBean.selectedUser}" />
-		       </p:commandLink >
-        	</td>
-        </tr></table>
+        <div class="dataListItem">
+        	<span style="padding-right: 5px;"><h:outputText value="#{user.lastName}"/></span>
+        	<span style="padding-right: 5px;"><h:outputText value="#{user.login}"/></span>
+        	<span style="padding-right: 5px;"><h:outputText value="#{user.admin}"/></span>
+			<h:form>
+				<p:commandButton title="Remove User" styleClass="deleteButton" action="#{adminControllerBean.removeUser(user)}" icon="ui-icon-closethick"/>
+        	</h:form>
+       		<p:commandLink update=":userDetail" oncomplete="PF('userDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search">
+	           <f:setPropertyActionListener value="#{user}" target="#{adminControllerBean.selectedUser}" />
+	       </p:commandLink >
+	    </div>
     </p:dataList>
     
     <p:dialog header="User Info" widgetVar="userDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">

@@ -1,0 +1,102 @@
+<ui:composition
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:mc="http://localhost/TpJ2E/mesComposants"
+		template="adminTemplate.xhtml">
+		
+		
+<ui:define name="header">
+<div id="header" class="header AdminHeader">
+<mc:adminHeaderContent titre="Administration"/>
+</div>
+</ui:define>
+
+<ui:define name="content">
+<div id="content" class="content">
+	<p:dataList value="#{adminControllerBean.recipeList}" var="recette" type="unordered" itemType="none" paginator="true" rows="5" styleClass="paginated">
+        <f:facet name="header">
+            	<span>Title</span>
+        </f:facet>
+        <div class="dataListItem">
+        	<span><h:outputText value="#{recette.name}"/></span>
+       		<h:form>
+				<p:commandButton title="Remove Recipe" styleClass="deleteButton" action="#{adminControllerBean.removeRecipe(recette)}" icon="ui-icon-closethick"/>
+        	</h:form>
+       		<p:commandLink update=":recetteDetail" oncomplete="PF('recipeDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search">
+	           <f:setPropertyActionListener value="#{recette}" target="#{adminControllerBean.selectedRecipe}" />
+	       </p:commandLink >
+		</div>
+    </p:dataList>
+    
+    <p:dialog header="Recette Info" widgetVar="recipeDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+        <p:outputPanel id="recetteDetail" style="text-align:center;">
+        	<h:form>
+	 		<div class="ui-g">    
+	        <div class="ui-g-12 ui-g-nopad">
+	            <div class="ui-g">
+	                <div class="ui-g-12 ui-md-1">
+	                	<img src="../ressource/duration.png" alt="preparationTime - Logo" class="preparationTime_logo" width="80" height="80"/>
+	                </div>
+	                <div class="ui-g-12 ui-md-5">
+	                	<div class="ui-g">
+	                		<h:outputLabel for="preparationTime" value="Preparation duration" />
+	                	</div>
+	                	<div class="ui-g">
+	                		<p:spinner id="preparationTime" value="#{adminControllerBean.selectedRecipe.preparationTime}" stepFactor="1" />
+	                	</div>
+	       			</div>
+	                <div class="ui-g-12 ui-md-1">
+	                	<img src="../ressource/expertise.png" alt="Expertise - Logo" class="expertise_logo" width="80" height="80"/>               	
+	                </div>
+	                <div class="ui-g-12 ui-md-5">
+	                	<div class="ui-g">
+	                		<h:outputLabel for="level" value= "Cook expertise"/>
+	                	</div>
+	                	<div class="ui-g">
+	                		<p:rating id="level" value="#{adminControllerBean.selectedRecipe.level}" />
+	                	</div>
+					</div>
+	            </div>
+	            <div class="ui-g">
+	                <div class="ui-g-12 ui-md-1">
+	                	<img src="../ressource/nb_person.png" alt="Number of Person - Logo" class="nb_person_logo" width="80" height="80"/>               	
+	                </div>
+	                <div class="ui-g-12 ui-md-5">
+	                	<div class="ui-g">
+	                		<h:outputLabel for="nb_person" value= "For how many people"/>
+	                	</div>
+	                	<div class="ui-g">
+	                		<p:inputText id="nb_person" value="#{adminControllerBean.selectedRecipe.nbPeople}"  style="width: 100px"/>
+	                	</div>
+	                	<div class="ui-g">
+	                		<p:slider for="nb_person" style="width: 100px"/>
+	                	</div>				
+	       			</div>
+	                <div class="ui-g-12 ui-md-1">
+	                	<img src="../ressource/type.png" alt="Type - Logo" class="type_logo" width="80" height="80"/>               	
+	                </div>
+	                <div class="ui-g-12 ui-md-5">
+	                	<div class="ui-g">
+	                		<h:outputLabel for="cooktype" value= "Cook Type"/>
+	                	</div>
+	                	<div class="ui-g">
+	                		<p:inputText id="cooktype" value="#{adminControllerBean.selectedRecipe.cooktype}"  style="width: 100px"/>
+	                		<!--TODO chekbox  <p:selectCheckboxMenu id="cooktype" value="#{recipeSearch.recette.cooktype}"  multiple="true"
+	                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px"/>
+	            			<f:selectItems for="cooktype" value="#{recipeSearch.recette.cooktype}" />-->
+	                	</div>	
+					</div>
+	            </div>	            
+	        </div>    
+			</div>
+			<p:commandButton value="Save" action="#{adminControllerBean.search}" style="position:relative;float:right" styleClass="ui-priority-primary" ajax="false" />
+			</h:form>	
+        </p:outputPanel>
+    </p:dialog>
+</div>
+</ui:define>
+
+</ui:composition>

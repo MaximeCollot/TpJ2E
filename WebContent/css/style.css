@@ -24,6 +24,7 @@ h1, h2 {
 
 .content {
 	height: 82%;
+	text-align: center;
 }
 
 .footer {
@@ -108,4 +109,13 @@ h1, h2 {
 
 .adminList {
 	width: 50%;
+}
+
+.dataListItem {
+	display: inline-flex;
+}
+
+.deleteButton {
+	width: 16px;
+	height: 16px;
 }

@@ -71,9 +71,9 @@ public class AdminControllerBean implements Serializable{
 				updateRecipeList();
 				return "mngrecipes?faces-redirect=true";
 			case "AdminHome" :
-				return "admin?faces-redirect=true";
+				return "index?faces-redirect=true";
 			default :
-				return "admin?faces-redirect=true";
+				return "index?faces-redirect=true";
 		}
 	}
 	
@@ -164,12 +164,26 @@ public class AdminControllerBean implements Serializable{
 		this.selectedRecipe = selectedRecipe;
 	}
 	
-	public void removeUser(User user){
-		System.out.println(user);
+	public String removeUser(User user) throws IOException{
+		try {
+			userDao.delete(user);
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "User deleted !", null));
+		return goTo("MngUsers");
 	}
 
-	public void removeRecipe(Recette recette) {
-		System.out.println(recette);
+	public String removeRecipe(Recette recette) throws IOException {
+		try {
+			recipeDao.delete(recette);
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Recipe deleted !", null));
+		return goTo("MngRecipes");
 	}
 	
 	@PreDestroy
