@@ -38,7 +38,7 @@ public class UserDao extends Dao<User> {
 		HashMap<String, User> hs = new HashMap<>();
 		while (rs.next()) {
 			hs.put(rs.getString(1),
-					new User(rs.getString("firstName"), rs.getString("lastName"), rs.getDate("birthday").toString(),
+					new User(rs.getString("firstName"), rs.getString("lastName"), rs.getString("birthday"),
 							rs.getString("email"), rs.getString("login"), rs.getString("password"), rs.getBoolean("isAdmin")));
 		}
 		rs.close();
@@ -55,7 +55,7 @@ public class UserDao extends Dao<User> {
 			ps.setString(1, (String) id);
 			rs = ps.executeQuery();
 			rs.next();
-			u = new User(rs.getString("firstName"), rs.getString("lastName"), rs.getDate("birthday").toString(),
+			u = new User(rs.getString("firstName"), rs.getString("lastName"), rs.getString("birthday"),
 					rs.getString("email"), rs.getString("login"), rs.getString("pa$$woRd"), rs.getBoolean("isAdmin"));
 					
 		}
@@ -69,10 +69,10 @@ public class UserDao extends Dao<User> {
 		boolean res = true;
 		connexionDB = Connexion.getInstance();
 		try (PreparedStatement ps = connexionDB
-				.prepareStatement("INSERT INTO u$eR(firstName, lastName, birthday, email,login,password, isAdmin) values(?,?,?,?,?,?,?)")) {
+				.prepareStatement("INSERT INTO u$eR(firstName, lastName, birthday, email,login,	pa$$woRd, isAdmin) values(?,?,?,?,?,?,?)")) {
 			ps.setString(1, u.getFirstName());
 			ps.setString(2, u.getLastName());
-			ps.setString(3, u.getDdn());
+			ps.setString(3, u.getAge());
 			ps.setString(4, u.getEmail());
 			ps.setString(5, u.getLogin());
 			ps.setString(6, u.getPassword());
@@ -120,7 +120,7 @@ public class UserDao extends Dao<User> {
 				.prepareStatement("UPDATE u$eR SET firstName=?, lastName=?, birthday=?, email=?, pa$$word=?, isAdmin=? where login=?")) {
 			ps.setString(1, u.getFirstName());
 			ps.setString(2, u.getLastName());
-			ps.setString(3, u.getDdn());
+			ps.setString(3, u.getAge());
 			ps.setString(4, u.getEmail());
 			ps.setString(5, u.getPassword());
 			ps.setBoolean(6, u.isAdmin());

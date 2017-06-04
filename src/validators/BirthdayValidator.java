@@ -12,7 +12,7 @@ import javax.faces.validator.*;
 @FacesValidator(value = "validators.birthday")
 public class BirthdayValidator implements Validator {
 	
-	private static final String BIRTHDAY_PATTERN = "[0-9]-[0-9]-[0-9]";
+	private static final String BIRTHDAY_PATTERN = "[0-9][0-9]";
 	private Pattern pattern;
 	private Matcher matcher;
 
@@ -25,7 +25,7 @@ public class BirthdayValidator implements Validator {
 		Object value) throws ValidatorException {
 		matcher = pattern.matcher(value.toString());
 		if(!matcher.matches()){
-			FacesMessage msg =new FacesMessage("Birthday validation failed.", "Birthday Validation failed please follow the contraint"+BIRTHDAY_PATTERN);
+			FacesMessage msg =new FacesMessage("Birthday validation failed.");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg); 
 		}

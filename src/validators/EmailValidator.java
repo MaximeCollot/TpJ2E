@@ -11,20 +11,22 @@ import javax.faces.validator.*;
 @FacesValidator(value = "validators.email")
 public class EmailValidator implements Validator {
 	
-	private static final String EMAIL_PATTERN = "[a-zA-Z0-9-._]+@[a-zA-Z0-9-._].[a-z]+";
+	private static final String EMAIL_PATTERN = "^[A-Za-z0-9+_.-]+@(.+)$";
 	private Pattern pattern;
 	private Matcher matcher;
 
 	public EmailValidator() {
+		System.err.println("LOUIS");
 		pattern = Pattern.compile(EMAIL_PATTERN);
 	}
 
 	@Override
 	public void validate(FacesContext context, UIComponent component,
 		Object value) throws ValidatorException {
+		pattern = Pattern.compile(EMAIL_PATTERN);
 		matcher = pattern.matcher(value.toString());
 		if(!matcher.matches()){
-			FacesMessage msg =new FacesMessage("Email validation failed.", "EMail Validation failed please follow the contraint"+EMAIL_PATTERN);
+			FacesMessage msg =new FacesMessage("Email validation failed.");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg); 
 		}

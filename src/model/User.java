@@ -1,10 +1,15 @@
 package model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import sun.java2d.pipe.SpanShapeRenderer.Simple;
+
 public class User {
 
 	private String firstName;
 	private String lastName;
-	private String ddn;
+	private String age;
 	private String email;
 	private String login;
 	private String password;
@@ -19,11 +24,23 @@ public class User {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.ddn = ddn;
+		this.age = ddn;
 		this.email = email;
 		this.login = login;
 		this.password = password;
 		this.isAdmin=isAdmin;
+	}
+	
+	public User(String firstName, String lastName, String ddn, String email,
+			String login, String password) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = ddn;
+		this.email = email;
+		this.login = login;
+		this.password = password;
+		this.isAdmin=false;
 	}
 	
 	
@@ -53,12 +70,12 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public String getDdn() {
-		return ddn;
+	public String getAge() {
+		return age;
 	}
 
-	public void setDdn(String ddn) {
-		this.ddn = ddn;
+	public void setAge(String ddn) {
+		this.age = ddn;
 	}
 
 	public String getEmail() {
@@ -88,7 +105,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [firstName=" + firstName + ", lastName=" + lastName + ", ddn=" + ddn + ", email=" + email
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", ddn=" + age + ", email=" + email
 				+ ", login=" + login + ", password=" + password + "]";
 	}
 

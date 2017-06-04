@@ -8,17 +8,15 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.*;
 
-// Validateur pour fistname & lastname
-
-@FacesValidator(value = "validators.lastname")
-public class LastnameValidator implements Validator {
+@FacesValidator(value = "validators.login")
+public class LoginValidator implements Validator {
 	
-	private static final String LASTNAME_PATTERN = "^[a-zA-Z0-9]+";
+	private static final String LOGIN_PATTERN = "[a-zA-Z0-9-._]";
 	private Pattern pattern;
 	private Matcher matcher;
 
-	public LastnameValidator() {
-		pattern = Pattern.compile(LASTNAME_PATTERN);
+	public LoginValidator() {
+		pattern = Pattern.compile(LOGIN_PATTERN);
 	}
 
 	@Override
@@ -26,14 +24,10 @@ public class LastnameValidator implements Validator {
 		Object value) throws ValidatorException {
 		matcher = pattern.matcher(value.toString());
 		if(!matcher.find()){
-			FacesMessage msg;
-			if(component.getId().equals("lastname")){
-				msg =new FacesMessage("Lastname validation failed.");
-			} else {
-				 msg =new FacesMessage("FirstName validation failed.");
-			}
+			FacesMessage msg =new FacesMessage("Login validation failed.");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg); 
 		}
 	}
 }
+
