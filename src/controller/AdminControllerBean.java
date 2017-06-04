@@ -168,6 +168,22 @@ public class AdminControllerBean implements Serializable{
 		}
 	}
 	
+	public String saveUser() throws IOException {
+			try {
+				recipeDao.update(selectedRecipe);
+			} catch (SQLException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				recipeDao.insert(selectedRecipe);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return goTo("MngUsers");
+	}
+	
 	public Recette getSelectedRecipe() {
 		return selectedRecipe;
 	}

@@ -35,35 +35,56 @@
 	    </div>
     </p:dataList>
     
+    <p:commandLink update=":userDetail" oncomplete="PF('userDialog').show()" title="Add User" styleClass="ui-button ui-corner-all ui-state-default">
+        <h:outputText value="Add User" />
+        <f:setPropertyActionListener value="#{adminControllerBean.newUser}" target="#{adminControllerBean.selectedUser}" />
+    </p:commandLink >
+    
     <p:dialog header="User Info" widgetVar="userDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
         <p:outputPanel id="userDetail" style="text-align:center;">
-            <p:panelGrid  columns="2" rendered="#{not empty adminControllerBean.selectedUser}" columnClasses="label,value">
- 
-                <h:outputText value="First Name:" />
-                <h:outputText value="#{adminControllerBean.selectedUser.firstName}" />
- 
-                <h:outputText value="Last Name:" />
-                <h:outputText value="#{adminControllerBean.selectedUser.lastName}" />
-                
-                <h:outputText value="BirthDay:" />
-                <h:outputText value="#{adminControllerBean.selectedUser.ddn}" />
-                
-                <h:outputText value="Email:" />
-                <h:outputText value="#{adminControllerBean.selectedUser.email}" />
-                
-                <h:outputText value="Login:" />
-                <h:outputText value="#{adminControllerBean.selectedUser.login}" />
-                
-                <h:outputText value="Password:" />
-                <h:outputText value="#{adminControllerBean.selectedUser.password}" />
-                
-                <h:outputText value="Password:" />
-                <h:outputText value="#{adminControllerBean.selectedUser.password}" />
-                
-                <h:outputText value="Admin:" />
-                <h:outputText value="#{adminControllerBean.selectedUser.admin}" />
-                
-            </p:panelGrid>
+            <h:form>
+            <p:panelGrid columns="3">	
+            	<h:outputLabel for="firstname" value="FirstName" />		 
+			    <p:inputText id="firstname" value="#{adminControllerBean.selectedUser.firstName}"
+					required="true">
+					<f:validator validatorId="validators.lastname" />
+				</p:inputText>
+				<h:message for="firstname" showDetail="true" style="color:red"/>
+			 
+			    <h:outputLabel for="lastname" value="LastName" />		 
+			    <p:inputText id="lastname" value="#{adminControllerBean.selectedUser.lastName}" required="true">
+					<f:validator validatorId="validators.lastname" />
+				</p:inputText>
+				<h:message for="lastname" showDetail="true" style="color:red"/>
+			 
+			    <h:outputLabel for="birthday" value="Age" />		 
+			    <p:inputText id="birthday" value="#{adminControllerBean.selectedUser.age}" required="true">
+					<f:validator validatorId="validators.birthday" />
+				</p:inputText>
+				<h:message for="birthday" showDetail="true" style="color:red" />
+			 
+			    <h:outputLabel for="email" value="Email" />		 
+			    <p:inputText id="email" value="#{adminControllerBean.selectedUser.email}" required="true">
+					<f:validator validatorId="validators.email" />
+				</p:inputText>
+				<h:message for="email" showDetail="true" style="color:red" />
+				
+				<h:outputLabel for="login" value="Login" />		 
+			    <p:inputText id="login" value="#{adminControllerBean.selectedUser.login}" required="true">
+					<f:validator validatorId="validators.login" />
+				</p:inputText>
+				<h:message for="login" showDetail="true" style="color:red"/>
+				
+				<h:outputLabel for="password" value="password" />
+				<p:password id="password" value="#{adminControllerBean.selectedUser.password}" match="password2" required="true" />
+				
+				<h:message for="password" showDetail="true" style="color:red"/>
+				
+				<h:outputLabel for="password2" value="Re-enter password" />
+				<p:password id="password2" value="#{adminControllerBean.selectedUser.password}" required="true"/>
+			</p:panelGrid>
+			<p:commandButton value="Save" action="#{adminControllerBean.saveUser()}"/>
+			</h:form>	
         </p:outputPanel>
     </p:dialog>
 </div>

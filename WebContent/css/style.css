@@ -114,4 +114,19 @@ h1, h2 {
     height: 20px;
 }
 
+.adminList {
+	width: 50%;
+}
 
+.dataListItem {
+	display: inline-flex;
+}
+
+.deleteButton {
+	width: 16px;
+	height: 16px;
+}
+
+.inputTime input {
+	width: 100px;
+}

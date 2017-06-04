@@ -18,14 +18,15 @@
 				<br />
 				
 				<h:outputText value="lastname" />
-				<p:inputText id="lastname" value="#{registerBean.user.lastName}" required="true">
+				<p:inputText id="firstname" value="#{registerBean.user.firstName}"
+					required="true">
 					<f:validator validatorId="validators.lastname" />
 				</p:inputText>
-				<h:message for="lastname" showDetail="true" style="color:red"/>
+				<h:message for="firstname" showDetail="true" style="color:red"/>
 				<br />
 
 				<h:outputLabel for="birthday" value="Birthday" />
-			<p:inputText id="birthday" value="#{registerBean.user.age}" required="true">
+				<p:inputText id="birthday" value="#{registerBean.user.age}" required="true">
 					<f:validator validatorId="validators.birthday" />
 				</p:inputText>
 				<h:message for="birthday" showDetail="true" style="color:red" />

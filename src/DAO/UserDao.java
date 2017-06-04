@@ -39,7 +39,7 @@ public class UserDao extends Dao<User> {
 		while (rs.next()) {
 			hs.put(rs.getString(1),
 					new User(rs.getString("firstName"), rs.getString("lastName"), rs.getString("birthday"),
-							rs.getString("email"), rs.getString("login"), rs.getString("password"), rs.getBoolean("isAdmin")));
+							rs.getString("email"), rs.getString("login"), rs.getString("pa$$woRd"), rs.getBoolean("isAdmin"), rs.getString("lastConnection"), rs.getInt("connectionDuration")));
 		}
 		rs.close();
 		connexionDB.close();
@@ -56,7 +56,7 @@ public class UserDao extends Dao<User> {
 			rs = ps.executeQuery();
 			rs.next();
 			u = new User(rs.getString("firstName"), rs.getString("lastName"), rs.getString("birthday"),
-					rs.getString("email"), rs.getString("login"), rs.getString("pa$$woRd"), rs.getBoolean("isAdmin"));
+					rs.getString("email"), rs.getString("login"), rs.getString("pa$$woRd"), rs.getBoolean("isAdmin"), rs.getString("lastConnection"), rs.getInt("connectionDuration"));
 					
 		}
 		rs.close();

@@ -30,7 +30,7 @@
 	       </p:commandLink >
 		</div>
     </p:dataList>
-    <p:commandLink update=":recetteDetail" oncomplete="PF('recipeDialog').show()" title="View Detail" styleClass="ui-button ui-corner-all ui-state-default">
+    <p:commandLink update=":recetteDetail" oncomplete="PF('recipeDialog').show()" title="Add Recipe" styleClass="ui-button ui-corner-all ui-state-default">
         <h:outputText value="Add Recipe" />
         <f:setPropertyActionListener value="#{adminControllerBean.newRecipe}" target="#{adminControllerBean.selectedRecipe}" />
     </p:commandLink >
