@@ -105,7 +105,6 @@ public class UserDao extends Dao<User> {
 				ps.cancel();
 				res = false;
 			}
-			connexionDB.commit();
 			ps.close();
 			connexionDB.close();
 		}
@@ -117,7 +116,7 @@ public class UserDao extends Dao<User> {
 		boolean res = true;
 		connexionDB = Connexion.getInstance();
 		try (PreparedStatement ps = connexionDB
-				.prepareStatement("UPDATE u$eR SET firstName=?, lastName=?, birthday=?, email=?, pa$$word=?, isAdmin=? where login=?")) {
+				.prepareStatement("UPDATE u$eR SET firstName=?, lastName=?, birthday=?, email=?, pa$$word=?, isAdmin=?, lastConnection=?, connectionduration=? where login=?")) {
 			ps.setString(1, u.getFirstName());
 			ps.setString(2, u.getLastName());
 			ps.setString(3, u.getAge());
@@ -125,6 +124,8 @@ public class UserDao extends Dao<User> {
 			ps.setString(5, u.getPassword());
 			ps.setBoolean(6, u.isAdmin());
 			ps.setString(7, u.getLogin());
+			ps.setString(8, u.getLastConnection().toString());
+			ps.setLong(9, u.getConnectionDuration());
 			try {
 				ps.executeUpdate();
 			} catch (SQLException e) {

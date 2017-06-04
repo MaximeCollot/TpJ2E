@@ -4,6 +4,10 @@ package controller;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -12,7 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import DAO.RecetteDao;
-import DAO.UserDao;
+
 import connexion.Connexion;
 import model.Recette;
 
@@ -21,13 +25,41 @@ import model.Recette;
 @SessionScoped
 
 public class RecipeSearch implements Serializable{
-	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1020826598289442019L;
 	private Recette recette;
 	private String recipe_view = "search";
+	private List <Recette> listResult;
+	
+	private Recette selectedRecette;
+	
+
+	public Recette getSelectedRecette() {
+		return selectedRecette;
+	}
+
+	public void setSelectedRecette(Recette selectedRecette) {
+		this.selectedRecette = selectedRecette;
+	}
+
+	public List<Recette> getListResult() {
+		return listResult;
+	}
+
+	public void setListResult(List<Recette> listResult) {
+		this.listResult = listResult;
+	}
+
+	public RecetteDao getRecetteDao() {
+		return recetteDao;
+	}
+
+	public void setRecetteDao(RecetteDao recetteDao) {
+		this.recetteDao = recetteDao;
+	}
 
 	private RecetteDao recetteDao;
 	
@@ -43,6 +75,7 @@ public class RecipeSearch implements Serializable{
 	public RecipeSearch() {
 		super();
 		recette = new Recette();
+		listResult = new ArrayList<Recette>();
 		try {
 			recetteDao = new RecetteDao(Connexion.getInstance());
 		} catch (IOException e) {
@@ -66,31 +99,21 @@ public class RecipeSearch implements Serializable{
 		this.recette = recette;
 	}
 	
-	public String search () {
+	public String search () throws Exception {
+		
 		recipe_view = "result";
+		listResult = recetteDao.search(recette);
+		
 		return "recipe";
-	/*	try {
-			recette = recetteDao.search(recette);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (user.getPassword().equals(tempUser.getPassword())){
-			user = tempUser;
-			connected = "ok";
-			HttpSession session = SessionUtils.getSession();
-			session.setAttribute("connected", connected);
-		}else{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Probl�me de couple login/mot de passe", null));
-		}*/
 	}
+	
 	public String comeback () {
 		
 		recipe_view = "search";
+		listResult.clear();
+		recette =new Recette();
 		return "recipe";
+		
 	}
 
 }

@@ -16,4 +16,8 @@
 		<tag-name>accountPage</tag-name>
 		<source>account.xhtml</source>
 	</tag>
+	<tag>
+		<tag-name>adminHeaderContent</tag-name>
+		<source>adminHeader.xhtml</source>
+	</tag>
 </facelet-taglib>

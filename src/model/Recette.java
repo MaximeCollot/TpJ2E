@@ -2,14 +2,17 @@ package model;
 
 public class Recette {
 
-	private int id =0;
-	private String name ="init";
-	private String recipe= "init";
-	private int preparationTime = 0;
+	private int id = -1;
+	private String name ="INIT";
+	private String recipe= "INIT";
+	private int preparationTime = -1;
 	private int level = -1;
-	private int nbPeople =0;
-	private String cooktype ="NULL";
+	private int nbPeople = -1;
+	private String cooktype = " ";
+	private String photo =" ";
 	
+	
+
 	public Recette() {
 		super();
 	}
@@ -24,8 +27,28 @@ public class Recette {
 		this.level = level;
 		this.nbPeople = nbPeople;
 		this.cooktype = cooktype;
+		setPhoto("");
+		
 	}
 	
+	
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		switch (this.cooktype) {
+        case "SALAD":  this.photo = "ressource/logo_salad.png";
+                 break;
+        case "FISH":  this.photo = "ressource/logo_fish.png";
+        	break;
+        case "DESSERT":  this.photo = "ressource/logo_dessert.png";
+        	break;
+        case "MEAL":  this.photo = "ressource/logo_meal.png";
+        	break;}
+		
+    
+	}
 
 	public int getId() {
 		return id;

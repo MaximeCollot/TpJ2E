@@ -14,9 +14,14 @@
 </div>
 </ui:define>
 
-	<ui:define name="content">
-		<div id="content" class="content" style="margin-left:30%">
-- <mc:registerPage/> 
+<ui:define name="content">
+<div id="content" class="content">
+<h:panelGroup layout="block" rendered="#{!controllerBean.connected}">
+<!-- <mc:registerPage/> -->
+</h:panelGroup>
+<h:panelGroup layout="block" rendered="#{controllerBean.connected}">
+<mc:accountPage/>
+</h:panelGroup>
 </div>
 </ui:define>
 

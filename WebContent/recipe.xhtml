@@ -15,6 +15,7 @@
 </ui:define>
 
 
+
 <ui:define name="content">
 <div id="content" class="content">
 
@@ -76,10 +77,14 @@
 	                		<h:outputLabel for="cooktype" value= "Cook Type"/>
 	                	</div>
 	                	<div class="ui-g">
-	                		<p:inputText id="cooktype" value="#{recipeSearch.recette.cooktype}"  style="width: 100px"/>
-	                		<!--  <p:selectCheckboxMenu id="cooktype" value="#{recipeSearch.recette.cooktype}"  multiple="true"
-	                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px"/>
-	            			<f:selectItems for="cooktype" value="#{recipeSearch.recette.cooktype}" />-->
+					        <p:selectOneListbox id="cooktype" value="#{recipeSearch.recette.cooktype}">
+					        	<f:selectItem itemLabel=" " itemValue=" " />
+					            <f:selectItem itemLabel="SALAD" itemValue="SALAD" />
+					            <f:selectItem itemLabel="MEAL" itemValue="MEAL" />
+					            <f:selectItem itemLabel="FISH" itemValue="FISH" />				            
+					            <f:selectItem itemLabel="DESSERT" itemValue="DESSERT" />
+					        </p:selectOneListbox>
+	   
 	                	</div>	
 	                	
 						
@@ -95,11 +100,55 @@
 
 <c:if test="#{recipeSearch.recipe_view == 'result'}">
 <p:fieldset legend="Result" style="margin-bottom:20px">
-	 <h:form>
-	Cook time = <h:outputText value="#{recipeSearch.recette.preparationTime}"/>
-	Level =<h:outputText value="#{recipeSearch.recette.level}"/>
-	Nb Personne =<h:outputText value="#{recipeSearch.recette.nbPeople}"/>
-	Type = <h:outputText value="#{recipeSearch.recette.cooktype}"/>
+	 <h:form id="form">
+
+	
+	
+	
+	<p:dataList value="#{recipeSearch.listResult}" var="recette" type="unordered" itemType="none" paginator="true" rows="5" styleClass="paginated">
+        <f:facet name="header">
+            Search Result
+        </f:facet>
+        <p:commandLink update=":form:recetteDetail" oncomplete="PF('recipeDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+            <f:setPropertyActionListener value="#{recette}" target="#{recipeSearch.selectedRecette}" />
+            <h:outputText value="#{recette.name}" />
+        </p:commandLink >
+        <h:outputText value="#{recette.name}, #{recette.recipe}" style="display:inline-block"/>
+    </p:dataList>
+    
+    <p:dialog header="Recette Info" widgetVar="recipeDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+        <p:outputPanel id="recetteDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty recipeSearch.selectedRecette}" columnClasses="label,value">
+                <f:facet name="header">
+                <img src="#{recipeSearch.selectedRecette.photo}" alt="type  Logo" class="type_logo" width="80" height="80"/>
+                    <!--  <p:graphicImage name="demo/images/car/#{dataListView.selectedCar.brand}-big.gif"/--> 
+                </f:facet>
+ 
+                <h:outputText value="Id:" />
+                <h:outputText value="#{recipeSearch.selectedRecette.id}" />
+ 
+                <h:outputText value="Name:" />
+                <h:outputText value="#{recipeSearch.selectedRecette.name}" />
+                
+                <h:outputText value="Recipe:" />
+                <h:outputText value="#{recipeSearch.selectedRecette.recipe}" />
+                
+                <h:outputText value="Preparation Time:" />
+                <h:outputText value="#{recipeSearch.selectedRecette.preparationTime}" />
+                
+                <h:outputText value="Level:" />
+                <h:outputText value="#{recipeSearch.selectedRecette.level}" />
+                
+                <h:outputText value="Number of people:" />
+                <h:outputText value="#{recipeSearch.selectedRecette.nbPeople}" />
+                
+                <h:outputText value="Type:" />
+                <h:outputText value="#{recipeSearch.selectedRecette.cooktype}" />
+                
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+	
 	<p:commandButton value="Come Back to search" id="comeback_button"  action="#{recipeSearch.comeback}" style="position:relative;float:right" styleClass="ui-priority-primary" ajax="false"/>
 	
 </h:form>

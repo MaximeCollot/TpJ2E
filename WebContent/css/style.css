@@ -18,11 +18,13 @@ h1, h2 {
 }
 
 .header {
-	height: 10%
+	height: 10%;
+	display: flex;
 }
 
 .content {
-	height: 85%;
+	height: 82%;
+	text-align: center;
 }
 
 .footer {
@@ -39,6 +41,13 @@ h1, h2 {
 
 .menuButton {
 	width: 25%;
+	height: 90%;
+	margin-left: 20px;
+	font-size: xx-large;
+}
+
+.adminMenuButton {
+	width: 35%;
 	height: 90%;
 	margin-left: 20px;
 	font-size: xx-large;
@@ -64,14 +73,24 @@ h1, h2 {
 	background-color: blue;
 }
 
+.AdminHeader {
+	background-color: red;
+}
+
 .titreForm {
 	height: 100%;
 	width: 30%;
 	float: left;
 }
-.titreHeader {
+
+.backHeader {
 	font-size: x-large;
 	height: 100%;	
+}
+
+.titleHeader {
+	margin: auto;
+	font-size: x-large;
 }
 
 .connectForm {

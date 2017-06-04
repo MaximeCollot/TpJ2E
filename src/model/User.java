@@ -14,13 +14,15 @@ public class User {
 	private String login;
 	private String password;
 	private boolean isAdmin;
+	private String lastConnection;
+	private long connectionDuration;
 
 	public User() {
 		super();
 	}
 
 	public User(String firstName, String lastName, String ddn, String email,
-			String login, String password, boolean isAdmin) {
+			String login, String password, boolean isAdmin, String lastConnection, int connectionDuration) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -29,6 +31,8 @@ public class User {
 		this.login = login;
 		this.password = password;
 		this.isAdmin=isAdmin;
+		this.lastConnection=lastConnection;
+		this.connectionDuration=connectionDuration;
 	}
 	
 	public User(String firstName, String lastName, String ddn, String email,
@@ -102,6 +106,22 @@ public class User {
 		this.password = password;
 	}
 	
+
+	public String getLastConnection() {
+		return lastConnection;
+	}
+
+	public void setLastConnection(String lastConnection) {
+		this.lastConnection = lastConnection;
+	}
+
+	public long getConnectionDuration() {
+		return connectionDuration;
+	}
+
+	public void setConnectionDuration(long connectionDuration) {
+		this.connectionDuration = connectionDuration;
+	}
 
 	@Override
 	public String toString() {

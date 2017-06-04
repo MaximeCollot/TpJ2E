@@ -20,16 +20,13 @@ public class Connexion {
 	public static Connection getInstance() throws IOException, SQLException {
 		if (connectionMySQL == null) {
 			try {
-				Properties props = new Properties();
-				FileInputStream fichier = new FileInputStream("/home/louis/workspace/TpJ2E/src/connexion/connexion.properties");
-				props.load(fichier);
 				MysqlDataSource mds = new MysqlDataSource();
-				mds.setUser(props.getProperty("user"));
-				mds.setPassword(props.getProperty("password"));
-				mds.setServerName(props.getProperty("serveur"));
+				mds.setUser("root");
+				mds.setPassword("stayfitadmin");
+				mds.setServerName("54.214.204.132");
 				mds.setUrl(mds.getUrl() + "projetJEE");
 				return (mds.getConnection());
-			} catch (IOException | SQLException e) {
+			} catch (SQLException e) {
 				System.err.println("Erreur lors de la connection : "
 						+ e.getMessage());
 			}
